@@ -27,7 +27,8 @@ public class AboutPage {
 
       // comparison gamers on line and gamers in game
       public boolean comparisonOnlineAndGame() {
-            String strGamersOnline = gamersInGame.getText();
+            Object objGamersOnline = (Object) gamersOnline;
+            String strGamersOnline = gamersOnline.getText();
             int intGamersOnline = Integer.parseInt(strGamersOnline);
             String strGamersInGame = gamersInGame.getText();
             int intGamersInGame = Integer.parseInt(strGamersInGame);

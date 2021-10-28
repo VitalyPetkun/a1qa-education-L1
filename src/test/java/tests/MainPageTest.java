@@ -18,7 +18,7 @@ public class MainPageTest {
     public static AboutPage aboutPage;
 
     @BeforeClass
-    public static void setup() {
+    public void setup() {
         driver = Browser.getInstance();
         homePage = new MainPage(driver);
         aboutPage = new AboutPage(driver);
@@ -45,7 +45,7 @@ public class MainPageTest {
     }
 
     @AfterClass
-    public static void closeDriver() {
+    public void closeDriver() {
         driver.quit();
     }
 }
