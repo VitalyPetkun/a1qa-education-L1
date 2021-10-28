@@ -26,7 +26,13 @@ public class ConfProperties {
     }
 
     //метод для возврата строки со значением из файла с настройками
-    public static String getProperty(String key) {
+    public static String getPropertyString(String key) {
         return PROPERTIES.getProperty(key);
+    }
+
+    public static int getPropertyInt(String key) {
+        String strNum = PROPERTIES.getProperty(key);
+        int num = Integer.parseInt(strNum);
+        return num;
     }
 }
