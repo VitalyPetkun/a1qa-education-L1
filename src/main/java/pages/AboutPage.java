@@ -18,19 +18,15 @@ public class AboutPage {
             List<WebElement> gamersOnline = driver.findElements(By.xpath("//div[@class='online_stat']"));
             int returnNumber=0;
             if (status == "Gamers online") {
+                  returnNumber=0;
                   returnNumber = Integer.valueOf(
                           gamersOnline.get(0).getText().replaceAll("[^0-9]+",""));
             }
             if (status == "Gamers in game") {
+                  returnNumber=1;
                   returnNumber = Integer.valueOf(
                           gamersOnline.get(1).getText().replaceAll("[^0-9]+",""));
             }
-            /*try {
-                  if(gamersOnline.size() == 0)
-                        throw new NullPointerException();
-
-            } catch (Exception e){
-            }*/
             return returnNumber;
       }
 
@@ -42,10 +38,12 @@ public class AboutPage {
             return getGamers(driver, "Gamers in game");
       }
 
-      public String getSubTitleAboutPage(WebDriver driver) {
+      public boolean getUniqueElementAboutPage(WebDriver driver) {
             WebDriverWait wait = new WebDriverWait(driver, 10);
             wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//div[@id='about_greeting']//div[@class='about_subtitle'])")));
-            return subTitle.getText();
+                    By.xpath("//div[@id='about_greeting']")));
+            List<WebElement> gutterBlock= driver.findElements(By.xpath("//div[@id='about_greeting']"));
+            boolean elementIs = gutterBlock.size() > 0;
+            return elementIs;
       }
 }

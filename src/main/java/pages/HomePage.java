@@ -1,9 +1,16 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 public class HomePage {
     @FindBy(xpath = "//div[@id='global_header']//span[@id='logo_holder']//a")
@@ -32,11 +39,11 @@ public class HomePage {
         subMenuStore.click();
     }
 
-    /*public String sdfg() {
+    public boolean getUniqueElementHomePage(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath(ConfProperties.getPropertyString("XPathContentTitle"))));
-        return driver.getCurrentUrl();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='home_page_gutter_block']")));
+        List<WebElement> gutterBlock= driver.findElements(By.xpath("//div[@class='home_page_gutter_block']"));
+        boolean elementIs = gutterBlock.size() > 0;
+        return elementIs;
     }
-    */
 }

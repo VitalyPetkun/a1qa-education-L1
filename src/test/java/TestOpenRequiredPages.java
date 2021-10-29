@@ -27,12 +27,13 @@ public class TestOpenRequiredPages {
 
     public static void clickLogoHolderToGoTheMainPageTrue() {
         homePage.clickLogoHolder();
-        Assert.assertEquals(ConfProperties.getPropertyString("URLHomePage"), driver.getCurrentUrl());
+        Assert.assertTrue(homePage.getUniqueElementHomePage(driver));
     }
 
     public static void clickButtonAboutToGoTheAboutPageTrue() {
         homePage.clickButtonAbout();
-        Assert.assertEquals(ConfProperties.getPropertyString("URLAboutPage"), driver.getCurrentUrl());
+        Assert.assertTrue(aboutPage.getUniqueElementAboutPage(driver));
+
     }
 
     public static void comparisonOnlineAndGameOnlineMoreTrue() {
@@ -44,7 +45,8 @@ public class TestOpenRequiredPages {
 
     public static void clickSubMenuStoreToGoTheMainPageTrue() {
         homePage.clickSubMenuStore();
-        Assert.assertEquals(ConfProperties.getPropertyString("URLHomePage"), driver.getCurrentUrl());
+        Assert.assertTrue(homePage.getUniqueElementHomePage(driver));
+
     }
 
     @AfterClass
