@@ -8,25 +8,26 @@ import pages.ConfProperties;
 
 public class Browser {
     private static WebDriver driver;
-    private static Browser INSTANCE;
+    private static Browser browser;
 
-    private Browser() {
+    public static WebDriver getDriver() {
+        if (browser == null) {
+            browser = new Browser();
+            setupsBrowser();
+        }
+        return driver;
+    }
+
+    private static WebDriver setupsBrowser() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        // size frame browser
+        setSizeFrameBrowser();
+        return driver;
+    }
+
+    private static void setSizeFrameBrowser() {
         driver.manage().window().setSize(new Dimension(
                 ConfProperties.getPropertyInt("widthFrameBrowser"),
                 ConfProperties.getPropertyInt("heightFrameBrowser")));
     }
-
-    public static WebDriver getInstance() {
-        if (INSTANCE == null)
-            INSTANCE = new Browser();
-
-        return driver;
-    }
-
-    /*public static void main(String[] args) {
-        getInstance();
-    }*/
 }

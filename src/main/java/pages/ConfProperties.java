@@ -25,7 +25,7 @@ public class ConfProperties {
         }
     }
 
-    //метод для возврата строки со значением из файла с настройками
+    // return values from file conf.properties
     public static String getPropertyString(String key) {
         return PROPERTIES.getProperty(key);
     }

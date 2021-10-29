@@ -7,41 +7,45 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import java.util.List;
 
 public class AboutPage {
-      private WebDriver driver;
-
       @FindBy(xpath = "//div[@id='about_greeting']//div[@class='about_subtitle']")
       private WebElement subTitle;
 
-      @FindBy(xpath = "//div[@class='online_stats']//div[@class='online_stat'][1]//text()[2]")
-      private WebElement gamersOnline;
+      private int getGamers(WebDriver driver, String status) {
+            driver.get(ConfProperties.getPropertyString("URLAboutPage"));
+            List<WebElement> gamersOnline = driver.findElements(By.xpath("//div[@class='online_stat']"));
+            int returnNumber=0;
+            if (status == "Gamers online") {
+                  returnNumber = Integer.valueOf(
+                          gamersOnline.get(0).getText().replaceAll("[^0-9]+",""));
+            }
+            if (status == "Gamers in game") {
+                  returnNumber = Integer.valueOf(
+                          gamersOnline.get(1).getText().replaceAll("[^0-9]+",""));
+            }
+            /*try {
+                  if(gamersOnline.size() == 0)
+                        throw new NullPointerException();
 
-      @FindBy(xpath = "//div[@class='online_stats']//div[@class='online_stat'][2]//text()[2]")
-      private WebElement gamersInGame;
-
-      public AboutPage(WebDriver driver) {
-            PageFactory.initElements(driver, this);
-            this.driver = driver;
+            } catch (Exception e){
+            }*/
+            return returnNumber;
       }
 
-      // comparison gamers on line and gamers in game
-      public boolean comparisonOnlineAndGame() {
-            Object objGamersOnline = (Object) gamersOnline;
-            String strGamersOnline = gamersOnline.getText();
-            int intGamersOnline = Integer.parseInt(strGamersOnline);
-            String strGamersInGame = gamersInGame.getText();
-            int intGamersInGame = Integer.parseInt(strGamersInGame);
-
-            if(intGamersOnline >= intGamersInGame)
-                  return true;
-            else
-                  return false;
+      public int getGamersOnline(WebDriver driver) {
+            return getGamers(driver, "Gamers online");
       }
 
-      public String getSubTitleAboutPage() {
+      public int getGamersInGame(WebDriver driver) {
+            return getGamers(driver, "Gamers in game");
+      }
+
+      public String getSubTitleAboutPage(WebDriver driver) {
             WebDriverWait wait = new WebDriverWait(driver, 10);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ConfProperties.getPropertyString("XPathSubTitle"))));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//div[@id='about_greeting']//div[@class='about_subtitle'])")));
             return subTitle.getText();
       }
 }
