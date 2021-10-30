@@ -4,7 +4,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pages.AboutPage;
 import pages.ConfProperties;
 import pages.HomePage;
 import pages.SalesLeadersPage;
@@ -27,15 +26,21 @@ public class TestSamplesOfGames {
     }
 
     @Test(priority = 1)
-    public static void clickMenuYourStoreToGoTheMainPageTrue() {
-        homePage.clickMenuYourStore(driver);
+    public static void clickMenuYourStore_ToGoTheMainPage_True() {
+        homePage.clickPopupMenuHomePage(driver);
         Assert.assertTrue(homePage.getUniqueElementHomePage(driver));
     }
 
     @Test(priority = 2)
-    public static void clickPopupMenuSalesLeadersToGoTheSalesLeadersPageTrue() {
+    public static void clickPopupMenuSalesLeaders_ToGoTheSalesLeadersPage_True() {
         homePage.clickPopupMenuSalesLeaders(driver);
         Assert.assertTrue(salesLeadersPage.getUniqueElementSalesLeadersPage(driver));
+    }
+
+    @Test(priority = 3)
+    public static void clickCheckBoxSteamOSPlusLinux_CheckBoxSelected_True() {
+        salesLeadersPage.clickCheckBoxSteamOSPlusLinux(driver);
+        Assert.assertTrue(salesLeadersPage.checkBoxStatus());
     }
 
     @AfterClass

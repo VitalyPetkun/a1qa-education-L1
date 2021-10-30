@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 public class HomePage {
@@ -35,9 +36,12 @@ public class HomePage {
         driver.get(ConfProperties.getPropertyString("URLHomePage"));
     }
 
-    public void clickMenuYourStore(WebDriver driver) {
+    public void clickPopupMenuHomePage(WebDriver driver) {
         Actions actions = new Actions(driver);
         actions.moveToElement(menuYourStore).build().perform();
+        WebElement firstResult = new WebDriverWait(driver, Duration.ofSeconds(2))
+                .until(ExpectedConditions.elementToBeClickable(
+                        By.xpath("//div[@id='foryou_flyout']//a[@class='popup_menu_item']")));
         popupMenuHomePage.click();
     }
 
@@ -52,11 +56,14 @@ public class HomePage {
     public void clickPopupMenuSalesLeaders(WebDriver driver) {
         Actions actions = new Actions(driver);
         actions.moveToElement(noteworthyTab).build().perform();
+        WebElement popupMenu = new WebDriverWait(driver, Duration.ofSeconds(2))
+                .until(ExpectedConditions.elementToBeClickable(
+                        By.xpath("//div[@id='noteworthy_flyout']//a[@class='popup_menu_item']")));
         popupMenuSalesLeaders.click();
     }
 
     public boolean getUniqueElementHomePage(WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 2);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='home_page_gutter_block']")));
         List<WebElement> gutterBlock= driver.findElements(By.xpath("//div[@class='home_page_gutter_block']"));
         boolean elementIs = gutterBlock.size() > 0;

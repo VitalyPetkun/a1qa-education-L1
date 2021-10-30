@@ -21,30 +21,30 @@ public class TestOpenRequiredPages {
         driver = Browser.getDriver();
         homePage = new HomePage(driver);
         aboutPage = new AboutPage();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         driver.get(ConfProperties.getPropertyString("URLHomePage"));
     }
 
     @Test(priority = 1)
-    public static void clickMenuYourStoreToGoTheMainPageTrue() {
-        homePage.clickMenuYourStore(driver);
+    public static void clickPopupMenuHomePage_ToGoTheMainPage_True() {
+        homePage.clickPopupMenuHomePage(driver);
         Assert.assertTrue(homePage.getUniqueElementHomePage(driver));
     }
 
     @Test(priority = 2)
-    public static void clickButtonAboutToGoTheAboutPageTrue() {
+    public static void clickButtonAbout_ToGoTheAboutPage_True() {
         homePage.clickButtonAbout();
         Assert.assertTrue(aboutPage.getUniqueElementAboutPage(driver));
 
     }
 
     @Test(priority = 3)
-    public static void comparisonOnlineAndGameOnlineMoreTrue() {
+    public static void comparisonOnlineAndGameOnlineMore_OnlineGamersAreMore_True() {
         Assert.assertTrue(aboutPage.getGamersOnline(driver) >= aboutPage.getGamersInGame(driver));
     }
 
     @Test(priority = 4)
-    public static void clickSubMenuStoreToGoTheMainPageTrue() {
+    public static void clickSubMenuStore_ToGoTheMainPage_True() {
         homePage.clickSubMenuStore();
         Assert.assertTrue(homePage.getUniqueElementHomePage(driver));
     }

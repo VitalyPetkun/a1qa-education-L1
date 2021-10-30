@@ -38,7 +38,7 @@ public class AboutPage {
       }
 
       public boolean getUniqueElementAboutPage(WebDriver driver) {
-            WebDriverWait wait = new WebDriverWait(driver, 10);
+            WebDriverWait wait = new WebDriverWait(driver, 2);
             wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("//div[@id='about_greeting']")));
             List<WebElement> gutterBlock= driver.findElements(By.xpath("//div[@id='about_greeting']"));
