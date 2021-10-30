@@ -25,25 +25,30 @@ public class TestOpenRequiredPages {
         driver.get(ConfProperties.getPropertyString("URLHomePage"));
     }
 
+    @Test(priority = 1)
     public static void clickMenuYourStoreToGoTheMainPageTrue() {
-        homePage.clickMenuYourStore();
+        homePage.clickMenuYourStore(driver);
         Assert.assertTrue(homePage.getUniqueElementHomePage(driver));
     }
 
+    @Test(priority = 2)
     public static void clickButtonAboutToGoTheAboutPageTrue() {
         homePage.clickButtonAbout();
         Assert.assertTrue(aboutPage.getUniqueElementAboutPage(driver));
 
     }
 
+    @Test(priority = 3)
     public static void comparisonOnlineAndGameOnlineMoreTrue() {
         Assert.assertTrue(aboutPage.getGamersOnline(driver) >= aboutPage.getGamersInGame(driver));
     }
 
+    @Test(priority = 4)
     public static void clickSubMenuStoreToGoTheMainPageTrue() {
         homePage.clickSubMenuStore();
         Assert.assertTrue(homePage.getUniqueElementHomePage(driver));
     }
+
 
     @AfterClass
     public void closeDriver() {

@@ -26,9 +26,16 @@ public class TestSamplesOfGames {
         driver.get(ConfProperties.getPropertyString("URLHomePage"));
     }
 
+    @Test(priority = 1)
     public static void clickMenuYourStoreToGoTheMainPageTrue() {
-        homePage.clickMenuYourStore();
+        homePage.clickMenuYourStore(driver);
         Assert.assertTrue(homePage.getUniqueElementHomePage(driver));
+    }
+
+    @Test(priority = 2)
+    public static void clickPopupMenuSalesLeadersToGoTheSalesLeadersPageTrue() {
+        homePage.clickPopupMenuSalesLeaders(driver);
+        Assert.assertTrue(salesLeadersPage.getUniqueElementSalesLeadersPage(driver));
     }
 
     @AfterClass

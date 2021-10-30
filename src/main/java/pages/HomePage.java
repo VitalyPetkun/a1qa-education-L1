@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,6 +14,9 @@ import java.util.List;
 public class HomePage {
     @FindBy(xpath = "//div[@id='foryou_tab']")
     private WebElement menuYourStore;
+
+    @FindBy(xpath = "//div[@id='foryou_flyout']//a[@class='popup_menu_item'][1]")
+    private WebElement popupMenuHomePage;
 
     @FindBy(xpath = "//div[@id='global_header']//div[@class='supernav_container']//a[@class='menuitem'][1]")
     private WebElement buttonAbout;
@@ -31,8 +35,10 @@ public class HomePage {
         driver.get(ConfProperties.getPropertyString("URLHomePage"));
     }
 
-    public void clickMenuYourStore() {
-        menuYourStore.click();
+    public void clickMenuYourStore(WebDriver driver) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(menuYourStore).build().perform();
+        popupMenuHomePage.click();
     }
 
     public void clickButtonAbout() {
@@ -41,6 +47,12 @@ public class HomePage {
 
     public void clickSubMenuStore() {
         subMenuStore.click();
+    }
+
+    public void clickPopupMenuSalesLeaders(WebDriver driver) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(noteworthyTab).build().perform();
+        popupMenuSalesLeaders.click();
     }
 
     public boolean getUniqueElementHomePage(WebDriver driver) {
