@@ -8,13 +8,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class HomePage {
-    @FindBy(xpath = "//div[@id='global_header']//span[@id='logo_holder']//a")
-    private WebElement logoHolder;
+    @FindBy(xpath = "//div[@id='foryou_tab']")
+    private WebElement menuYourStore;
 
     @FindBy(xpath = "//div[@id='global_header']//div[@class='supernav_container']//a[@class='menuitem'][1]")
     private WebElement buttonAbout;
@@ -22,13 +20,19 @@ public class HomePage {
     @FindBy(xpath = "//div[@id='global_header']//div[@class='supernav_container']//a[@class='menuitem supernav'][@data-tooltip-content='.submenu_store']")
     private WebElement subMenuStore;
 
+    @FindBy(xpath = "//div[@id='noteworthy_tab']//a[@class='pulldown_desktop']")
+    private WebElement noteworthyTab;
+
+    @FindBy(xpath = "//div[@id='noteworthy_flyout']//a[@class='popup_menu_item'][1]")
+    private WebElement popupMenuSalesLeaders;
+
     public HomePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         driver.get(ConfProperties.getPropertyString("URLHomePage"));
     }
 
-    public void clickLogoHolder() {
-        logoHolder.click();
+    public void clickMenuYourStore() {
+        menuYourStore.click();
     }
 
     public void clickButtonAbout() {
