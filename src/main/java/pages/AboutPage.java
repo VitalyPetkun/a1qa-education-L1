@@ -1,5 +1,6 @@
 package pages;
 
+import browser.Browser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,38 +10,35 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class AboutPage {
-      @FindBy(xpath = "//div[@id='about_greeting']//div[@class='about_subtitle']")
-      private WebElement subTitle;
-
-      private int getGamers(WebDriver driver, String status) {
-            List<WebElement> gamersOnline = driver.findElements(By.xpath("//div[@class='online_stat']"));
+      private int getGamers(String status) {
+            List<WebElement> gamersOnline = Browser.getDriver().findElements(By.xpath("//div[@class='online_stat']"));
             int returnNumber=0;
+            if(gamersOnline.size() == 0)
+                  Browser.getDriver().navigate().refresh();
             if (status == "Gamers online") {
-                  returnNumber=0;
                   returnNumber = Integer.valueOf(
                           gamersOnline.get(0).getText().replaceAll("[^0-9]+",""));
             }
             if (status == "Gamers in game") {
-                  returnNumber=1;
                   returnNumber = Integer.valueOf(
                           gamersOnline.get(1).getText().replaceAll("[^0-9]+",""));
             }
             return returnNumber;
       }
 
-      public int getGamersOnline(WebDriver driver) {
-            return getGamers(driver, "Gamers online");
+      public int getGamersOnline() {
+            return getGamers("Gamers online");
       }
 
-      public int getGamersInGame(WebDriver driver) {
-            return getGamers(driver, "Gamers in game");
+      public int getGamersInGame() {
+            return getGamers("Gamers in game");
       }
 
-      public boolean getUniqueElementAboutPage(WebDriver driver) {
-            WebDriverWait wait = new WebDriverWait(driver, 2);
+      public boolean getUniqueElementAboutPage() {
+            WebDriverWait wait = new WebDriverWait(Browser.getDriver(), 2);
             wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("//div[@id='about_greeting']")));
-            List<WebElement> gutterBlock= driver.findElements(By.xpath("//div[@id='about_greeting']"));
+            List<WebElement> gutterBlock= Browser.getDriver().findElements(By.xpath("//div[@id='about_greeting']"));
             boolean elementIs = gutterBlock.size() > 0;
             return elementIs;
       }

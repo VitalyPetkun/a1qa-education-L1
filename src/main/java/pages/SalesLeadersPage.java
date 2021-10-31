@@ -1,5 +1,6 @@
 package pages;
 
+import browser.Browser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,7 +16,7 @@ public class SalesLeadersPage {
     @FindBy(xpath = "//div[@class='block search_collapse_block'][@data-collapse-name='os']//div[@class='block_header']")
     private WebElement blockHeaderOS;
 
-    @FindBy(xpath = "//div[contains(@class,'tab_filter_control_row')][contains(@data-param,'os')][contains(@data-value,'linux')]")
+    @FindBy(xpath = "//div[contains(@class,'tab_filter_control_row')][contains(@data-param,'os')][contains(@data-value,'linux')]//span[contains(@class,'checkbox')]")
     private WebElement checkBoxSteamOSPlusLinux;
 
     @FindBy(xpath = "//div[@class='block search_collapse_block'][@data-collapse-name='category3']//div[@class='block_header']")
@@ -43,10 +44,10 @@ public class SalesLeadersPage {
     private WebElement numberGamesOnRequest;
 
     public void clickCheckBoxSteamOSPlusLinux(WebDriver driver) {
-        blockHeaderOS.click();
+      //  blockHeaderOS.click();
         WebElement checkBox = new WebDriverWait(driver, Duration.ofSeconds(2))
                 .until(ExpectedConditions.elementToBeClickable(
-                        By.xpath("//div[contains(@class,'tab_filter_control_row')][contains(@data-param,'os')][contains(@data-value,'linux')]")));
+                        By.xpath("//div[contains(@class,'tab_filter_control_row')][contains(@data-param,'os')][contains(@data-value,'linux')]//span[contains(@class,'checkbox')]")));
         checkBoxSteamOSPlusLinux.click();
     }
 
@@ -116,10 +117,11 @@ public class SalesLeadersPage {
         firstGame.click();
     }
 
-    public boolean getUniqueElementSalesLeadersPage(WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, 2);
+    public boolean getUniqueElementSalesLeadersPage() {
+        WebDriverWait wait = new WebDriverWait(Browser.getDriver(), 2);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='additional_search_options']")));
-        List<WebElement> additionalSearchOptions = driver.findElements(By.xpath("//div[@id='additional_search_options']"));
+        List<WebElement> additionalSearchOptions = Browser.getDriver().findElements(
+                By.xpath("//div[@id='additional_search_options']"));
         boolean elementIs = additionalSearchOptions.size() > 0;
         return elementIs;
     }
