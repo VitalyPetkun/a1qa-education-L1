@@ -4,18 +4,18 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ConfProperties {
+public class ConfigProperties {
     protected static FileInputStream fileInputStream;
     protected static Properties PROPERTIES;
     static {
         try {
             //указание пути до файла
-            fileInputStream = new FileInputStream("src/main/resources/conf.properties");
+            fileInputStream = new FileInputStream("src/main/resources/config.properties");
             PROPERTIES = new Properties();
             PROPERTIES.load(fileInputStream);
         } catch (IOException e) {
             e.printStackTrace();
-            //обработка возможного исключения (нет файла и т.п.)
+            //обработка возможного исключения
         } finally {
             if (fileInputStream != null)
                 try {
@@ -25,7 +25,7 @@ public class ConfProperties {
         }
     }
 
-    // return values from file conf.properties
+    // return values from file config.properties
     public static String getPropertyString(String key) {
         return PROPERTIES.getProperty(key);
     }

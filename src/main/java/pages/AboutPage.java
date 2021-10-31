@@ -2,16 +2,18 @@ package pages;
 
 import browser.Browser;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class AboutPage {
+      private String xpathGamersOnline = "//div[@class='online_stat']";
+      private String xpathGutterBlock = "//div[@id='about_greeting']";
+
+      private List<WebElement> gamersOnline;
+      private List<WebElement> gutterBlock;
+
       private int getGamers(String status) {
-            List<WebElement> gamersOnline = Browser.getDriver().findElements(By.xpath("//div[@class='online_stat']"));
+            gamersOnline = Browser.getDriver().findElements(By.xpath(xpathGamersOnline));
             int returnNumber=0;
             if(gamersOnline.size() == 0)
                   Browser.getDriver().navigate().refresh();
@@ -35,11 +37,7 @@ public class AboutPage {
       }
 
       public boolean getUniqueElementAboutPage() {
-            WebDriverWait wait = new WebDriverWait(Browser.getDriver(), 2);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//div[@id='about_greeting']")));
-            List<WebElement> gutterBlock= Browser.getDriver().findElements(By.xpath("//div[@id='about_greeting']"));
-            boolean elementIs = gutterBlock.size() > 0;
-            return elementIs;
+            gutterBlock = Browser.getDriver().findElements(By.xpath(xpathGutterBlock));
+            return (gutterBlock.size() > 0);
       }
 }

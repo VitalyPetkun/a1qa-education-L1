@@ -4,7 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import pages.ConfProperties;
+import pages.ConfigProperties;
 
 public class Browser {
     private static WebDriver driver;
@@ -27,7 +27,7 @@ public class Browser {
 
     private static void setSizeFrameBrowser() {
         driver.manage().window().setSize(new Dimension(
-                ConfProperties.getPropertyInt("widthFrameBrowser"),
-                ConfProperties.getPropertyInt("heightFrameBrowser")));
+                ConfigProperties.getPropertyInt("widthFrameBrowser"),
+                ConfigProperties.getPropertyInt("heightFrameBrowser")));
     }
 }
