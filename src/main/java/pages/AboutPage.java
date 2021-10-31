@@ -13,7 +13,6 @@ public class AboutPage {
       private WebElement subTitle;
 
       private int getGamers(WebDriver driver, String status) {
-            driver.get(ConfProperties.getPropertyString("URLAboutPage"));
             List<WebElement> gamersOnline = driver.findElements(By.xpath("//div[@class='online_stat']"));
             int returnNumber=0;
             if (status == "Gamers online") {
