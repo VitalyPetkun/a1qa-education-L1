@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 
-public class AboutPage {
+public class AboutPage extends Base{
       private String xpathGamersOnline = "//div[@class='online_stat']";
       private String xpathGutterBlock = "//div[@id='about_greeting']";
 
@@ -13,7 +13,7 @@ public class AboutPage {
       private List<WebElement> gutterBlock;
 
       private int getGamers(String status) {
-            gamersOnline = Browser.getDriver().findElements(By.xpath(xpathGamersOnline));
+            gamersOnline = findElements(xpathGamersOnline);
             int returnNumber=0;
             if(gamersOnline.size() == 0)
                   Browser.getDriver().navigate().refresh();
@@ -37,7 +37,7 @@ public class AboutPage {
       }
 
       public boolean getUniqueElementAboutPage() {
-            gutterBlock = Browser.getDriver().findElements(By.xpath(xpathGutterBlock));
+            gutterBlock = findElements(xpathGutterBlock);
             return (gutterBlock.size() > 0);
       }
 }

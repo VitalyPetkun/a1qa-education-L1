@@ -51,7 +51,7 @@ public class HomePage extends Base{
     }
 
     public boolean getUniqueElementHomePage() {
-        gutterBlock= Browser.getDriver().findElements(By.xpath(xpathGutterBlock));
+        gutterBlock= findElements(xpathGutterBlock);
         return (gutterBlock.size() > 0);
     }
 }

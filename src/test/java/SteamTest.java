@@ -20,7 +20,6 @@ public class SteamTest {
         salesLeadersPage = new SalesLeadersPage();
         Browser.getDriver().manage().timeouts();
     }
-/*
 
     public static void openRequiredPages() {
         homePage.clickPopupMenuHomePage();
@@ -34,7 +33,6 @@ public class SteamTest {
         homePage.clickSubMenuStore();
         Assert.assertTrue(homePage.getUniqueElementHomePage());
     }
-*/
 
     public static void samplesOfGames() {
         homePage.clickPopupMenuHomePage();
@@ -48,20 +46,16 @@ public class SteamTest {
 
         salesLeadersPage.clickCheckBoxCooperativeLAN();
         Assert.assertTrue(salesLeadersPage.statusCheckBoxCooperativeLAN());
-/*
-
-        salesLeadersPage.getNumberOfActionGames();
 
         salesLeadersPage.clickCheckBoxAction();
         Assert.assertTrue(salesLeadersPage.statusCheckBoxAction() &&
                 (salesLeadersPage.getNumberOfActionGames() == salesLeadersPage.getNumberGamesInList()) &&
                 (salesLeadersPage.getNumberOfActionGames() == salesLeadersPage.getNumberGamesOnRequest()));
-
         salesLeadersPage.getInfoFirstGame();
 
         salesLeadersPage.clickFirstGame();
-        Assert.assertTrue(salesLeadersPage.getInfoFirstGame() == firstGamePage.getInfoWithFirstGamePage());
-        */
+        Assert.assertTrue(salesLeadersPage.getInfoFirstGame() == firstGamePage.getInfoWithGamePage());
+
     }
 
     @AfterClass
