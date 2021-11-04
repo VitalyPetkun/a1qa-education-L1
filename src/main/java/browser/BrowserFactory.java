@@ -19,6 +19,7 @@ public class BrowserFactory {
             browser = new BrowserFactory();
             setupsBrowser();
         }
+
         return driver;
     }
 
@@ -57,5 +58,10 @@ public class BrowserFactory {
                 driver = new SafariDriver();
                 break;
         }
+    }
+
+    public static void quit() {
+        driver.quit();
+        browser = null;
     }
 }

@@ -15,11 +15,25 @@ public class MethodsForSearch {
                 .until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
     }
 
+    public boolean invisibilityOfElementWithText(String xpath, String originalText) {
+        return new WebDriverWait(BrowserFactory.getDriver(), Duration.ofSeconds(ConfigProperties.getPropertyInt("waitingTime")))
+                .until(ExpectedConditions.invisibilityOfElementWithText(By.xpath(xpath), originalText));
+    }
+
+    public boolean invisibilityOfAllElements(List<WebElement> elementList) {
+        return new WebDriverWait(BrowserFactory.getDriver(), Duration.ofSeconds(ConfigProperties.getPropertyInt("waitingTime")))
+                .until(ExpectedConditions.invisibilityOfAllElements(elementList));
+    }
+
     public WebElement findElement(String xpath) {
         return BrowserFactory.getDriver().findElement(By.xpath(xpath));
     }
 
     public List<WebElement> findElements(String xpath) {
         return BrowserFactory.getDriver().findElements(By.xpath(xpath));
+    }
+
+    public int webElementInInt(WebElement element) {
+        return Integer.valueOf(element.getText().replaceAll("[^0-9]+", ""));
     }
 }

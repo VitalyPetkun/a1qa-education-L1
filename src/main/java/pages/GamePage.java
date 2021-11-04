@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GamePage extends MethodsForSearch {
-    final private String xpathName = "//div[@id='appHubAppName']";
-    final private String xpathDateOfRelease = "//div[@class='release_date']//div[@class='date']";
-    final private String xpathPrice =
-            "//div[@id='game_area_purchase_section_add_to_cart_68179']//div[@class='discount_prices']//div[@class='discount_original_price']";
-    final private String xpathHighlights = "//div[@id='game_highlights']";
+    private final String xpathName = "//div[@id='appHubAppName']";
+    private final String xpathDateOfRelease = "//div[@class='release_date']//div[@class='date']";
+    private final String xpathPrice =
+            "//div[contains(@class,'game_purchase_price')]";
+    private final String xpathHighlights = "//div[@id='game_highlights']";
 
     private WebElement name;
     private WebElement dateOfRelease;
@@ -23,7 +23,7 @@ public class GamePage extends MethodsForSearch {
         List<String> infoGame = new ArrayList<String>();
         infoGame.add(0, name.getText());
         infoGame.add(1, dateOfRelease.getText());
-        infoGame.add(2, price.getText());
+        infoGame.add(2, String.valueOf(webElementInInt(price)));
         return infoGame;
     }
 

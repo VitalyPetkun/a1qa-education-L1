@@ -1,22 +1,26 @@
 import browser.BrowserFactory;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import org.testng.collections.CollectionUtils;
 import pages.*;
 
-@Test
+import java.util.List;
+
 public class SteamTest {
     private static HomePage homePage;
     private static AboutPage aboutPage;
     private static SalesLeadersPage salesLeadersPage;
     private static GamePage gamePage;
 
-    @BeforeClass
-    public void setup() {
+    @BeforeMethod
+    private void setup() {
         BrowserFactory.getDriver().get(ConfigProperties.getPropertyString("URLHomePage"));
         BrowserFactory.getDriver().manage().timeouts();
     }
+/*
 
-    public static void openRequiredPages() {
+    @Test
+    private void openRequiredPages() {
         homePage = new HomePage();
         aboutPage = new AboutPage();
 
@@ -35,8 +39,10 @@ public class SteamTest {
         Assert.assertTrue(homePage.getUniqueElementHomePage(),
                 "Не перешел на страницу магазина.");
     }
+*/
 
-    public static void samplesOfGames() {
+    @Test
+    private void samplesOfGames() {
         homePage = new HomePage();
         salesLeadersPage = new SalesLeadersPage();
         gamePage = new GamePage();
@@ -52,29 +58,35 @@ public class SteamTest {
         salesLeadersPage.clickCheckBoxSteamOSPlusLinux();
         Assert.assertTrue(salesLeadersPage.statusCheckBoxSteamOSPlusLinux(),
                 "Чекбокс \"SteamOS + Linux\" в блоке \"Операционная система\" не выбран.");
+
         salesLeadersPage.clickCheckBoxCooperativeLAN();
         Assert.assertTrue(salesLeadersPage.statusCheckBoxCooperativeLAN(),
                 "Чекбокс \"Кооператив (LAN)\" в блоке \"Количество игроков\" не выбран.");
 
+        int numberOfActionGames = salesLeadersPage.getNumberOfActionGames();
         salesLeadersPage.clickCheckBoxAction();
+        int numberGamesInList = salesLeadersPage.getNumberGamesInList();
+        int numberGamesOnRequest = salesLeadersPage.getNumberGamesOnRequest();
+
         Assert.assertTrue(salesLeadersPage.statusCheckBoxAction(),
                 "Чекбокс \"Экшен\" в блоке \"Метки\" не выбран.");
-        Assert.assertTrue(salesLeadersPage.getNumberOfActionGames() == salesLeadersPage.getNumberGamesInList(),
-                "Указанное количество результатов по запросу не соответствует количеству игр с меткой \"Экшен\"");
-        Assert.assertTrue(salesLeadersPage.getNumberOfActionGames() == salesLeadersPage.getNumberGamesOnRequest(),
+        Assert.assertTrue(numberOfActionGames == numberGamesOnRequest,
                 "Количество игр в списке не соответствует количеству игр с меткой \"Экшен\"");
+        Assert.assertTrue( numberOfActionGames == numberGamesInList,
+                "Указанное количество результатов по запросу не соответствует количеству игр с меткой \"Экшен\"");
 
-        salesLeadersPage.getInfoFirstGame();
-
+        List<String> infoFirstGame = salesLeadersPage.getInfoFirstGame();
         salesLeadersPage.clickFirstGame();
+        List<String> infoGame = gamePage.getInfoWithGamePage();
+
         Assert.assertTrue(gamePage.getUniqueElementGamePage(),
                 "Не перешел на страницу с описанием игры.");
-        Assert.assertTrue(salesLeadersPage.getInfoFirstGame() == gamePage.getInfoWithGamePage(),
+        Assert.assertTrue(infoFirstGame.containsAll(infoGame) && infoGame.containsAll(infoFirstGame),
                 "Название игры, дата релиза и цена в списке результатов не соответствуем на странице с описанием игры");
     }
 
-    @AfterClass
-    public void quitDriver() {
-        BrowserFactory.getDriver().quit();
+    @AfterMethod
+    private void quitDriver() {
+        BrowserFactory.quit();
     }
 }

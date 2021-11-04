@@ -7,36 +7,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SalesLeadersPage extends MethodsForSearch {
-    final private String xpathAdditionalSearchOptions = "//div[@id='additional_search_options']";
-    final private String xpathBlockContentOS =
+    private final String xpathAdditionalSearchOptions = "//div[@id='additional_search_options']";
+    private final String xpathBlockContentOS =
             "//div[@class='block search_collapse_block'][@data-collapse-name='os']//div[@class='block_content block_content_inner']";
-    final private String xpathCheckBoxSteamOSPlusLinux =
-            "//div[contains(@class,'tab_filter_control_row')][contains(@data-param,'os')][contains(@data-value,'linux')]//span";
-    final private String xpathBlockHeaderNumberGamers =
-            "//div[@class='block search_collapse_block collapsed'][@data-collapse-name='category3']//div[@class='block_header']";
-    final private String xpathCheckBoxCooperativeLAN =
-            "//div[contains(@class,'tab_filter_control_row')][contains(@data-param,'category3')][@data-value='48']//span[contains(@class,'tab_filter_control_label')]";
-    final private String xpathBlockHeaderTags =
+    private final String xpathCheckBoxSteamOSPlusLinux =
+            "//div[contains(@data-value,'linux')]/span";
+    private final String xpathBlockHeaderNumberGamers =
+            "//div[@data-collapse-name='category3']//div[@class='block_header']";
+    private final String xpathCheckBoxCooperativeLAN =
+            "//div[@data-value='48']/span";
+    private final String xpathBlockHeaderTags =
             "//div[contains(@class,'search_collapse_block')][@data-collapse-name='tags']//div[contains(@class,'block_header')]";
-    final private String xpathFlagSeeAll =
-            "//div[contains(@class,'search_collapse_block')][@data-collapse-name='tags']//a[@class='see_all_expander']";
-    final private String xpathCheckBoxAction = "//div[@id='TagFilter_Container']//div[@data-param='tags'][@data-value='19']";
-    final private String xpathFirstGameInList = "//div[@id='search_resultsRows']//a[contains(@class,'search_result_row')][1]";
-    final private String xpathNameFirstGameInList =
+    private final String xpathFlagSeeAll =
+            "//div[@data-collapse-name='tags']/a";
+    private final String xpathCheckBoxAction = "//div[@id='TagFilter_Container']//div[@data-param='tags'][@data-value='19']";
+    private final String xpathFirstGameInList = "//div[@id='search_resultsRows']//a[contains(@class,'search_result_row')][1]";
+    private final String xpathNameFirstGameInList =
             "//div[@id='search_resultsRows']//a[contains(@class,'search_result_row')][1]//span[@class='title']";
-    final private String xpathDateOfReleaseFirstGameInList =
+    private final String xpathDateOfReleaseFirstGameInList =
             "//div[@id='search_resultsRows']//a[contains(@class,'search_result_row')][1]//div[contains(@class,'search_released')]";
-    final private String xpathPriceFirstGameInList =
-            "//div[@id='search_resultsRows']//a[contains(@class,'search_result_row')][1]//div[contains(@class,'search_price discounted')]//span//strike";
-    final private String xpathNumberOfGamesAction =
-            "//div[@id='TagFilter_Container']//div[@data-param='tags'][@data-value='19']//span[@class='tab_filter_control_count']";
-    final private String xpathNumberGamesOnRequest = "//div[@id='search_results']//div[@class='search_results_count']";
-    final private String xpathBlockHeaderOS =
+    private final String xpathPriceFirstGameInList =
+            "//a[contains(@class,'search_result_row')][1]//div[@class='col search_price  responsive_secondrow']";
+    private final String xpathNumberOfGamesAction =
+            "//div[@data-value='19']//span[@class='tab_filter_control_count']";
+    private final String xpathNumberGamesOnRequest = "//div[@id='search_results']//div[@class='search_results_count']";
+    private final String xpathBlockHeaderOS =
             "//div[@class='block search_collapse_block'][@data-collapse-name='os']//div[@class='block_header']";
-    final private String xpathGamesResultList = "//div[@id='search_resultsRows']";
-    final private String xpathBlockContentNumberGamers =
-            "//div[@class='block search_collapse_block'][@data-collapse-name='category3']//div[@class='block_content block_content_inner']";
-    final private String xpathBlockContentTags =
+    private final String xpathGamesResultList = "//div[@id='search_resultsRows']/a";
+    private final String xpathBlockContentNumberGamers =
+            "//div[@data-collapse-name='category3']//div[contains(@class,'block_content')]";
+    private final String xpathBlockContentTags =
             "//div[contains(@class,'search_collapse_block')][@data-collapse-name='tags']//div[contains(@class,'block_content block_content_inner')]";
 
     private WebElement blockContentOS;
@@ -59,7 +59,7 @@ public class SalesLeadersPage extends MethodsForSearch {
     public void clickCheckBoxSteamOSPlusLinux() {
         blockContentOS = findElement(xpathBlockContentOS);
         blockHeaderOS = findElement(xpathBlockHeaderOS);
-        if(!blockContentOS.isDisplayed())
+        if (!blockContentOS.isDisplayed())
             blockHeaderOS.click();
         checkBoxSteamOSPlusLinux = expectedConditions(xpathCheckBoxSteamOSPlusLinux);
         checkBoxSteamOSPlusLinux.click();
@@ -70,10 +70,15 @@ public class SalesLeadersPage extends MethodsForSearch {
     }
 
     public void clickCheckBoxCooperativeLAN() {
+        blockContentNumberGamers = findElement(xpathBlockContentNumberGamers);
         blockHeaderNumberGamers = findElement(xpathBlockHeaderNumberGamers);
-        blockHeaderNumberGamers.click();
-        checkBoxCooperativeLAN = expectedConditions(xpathCheckBoxCooperativeLAN);
-        checkBoxCooperativeLAN.click();
+        if (!blockContentNumberGamers.isDisplayed())
+            blockHeaderNumberGamers.click();
+
+        checkBoxCooperativeLAN = findElement(xpathCheckBoxCooperativeLAN);
+        if (invisibilityOfElementWithText(xpathCheckBoxCooperativeLAN, checkBoxCooperativeLAN.getText()))
+            checkBoxCooperativeLAN.click();
+
     }
 
     public boolean statusCheckBoxCooperativeLAN() {
@@ -81,14 +86,7 @@ public class SalesLeadersPage extends MethodsForSearch {
     }
 
     public void clickCheckBoxAction() {
-        blockContentTags = expectedConditions(xpathBlockContentTags);
-        blockHeaderTags = expectedConditions(xpathBlockHeaderTags);
-        flagSeeAll = expectedConditions(xpathFlagSeeAll);
-        if(!blockContentTags.isDisplayed())
-            blockHeaderTags.click();
         checkBoxAction = expectedConditions(xpathCheckBoxAction);
-        if(!checkBoxAction.isDisplayed())
-            flagSeeAll.click();
         checkBoxAction.click();
     }
 
@@ -115,34 +113,40 @@ public class SalesLeadersPage extends MethodsForSearch {
     }
 
     public int getNumberOfActionGames() {
+        flagSeeAll = expectedConditions(xpathFlagSeeAll);
+        flagSeeAll.click();
+        int returnNum = 0;
         numberOfGamesAction = expectedConditions(xpathNumberOfGamesAction);
-        return Integer.valueOf(
-                numberOfGamesAction.getText().replaceAll("[^0-9]+",""));
+        if (invisibilityOfElementWithText(xpathNumberOfGamesAction, numberOfGamesAction.getText()))
+            returnNum = webElementInInt(numberOfGamesAction);
+        return returnNum;
     }
 
     public int getNumberGamesOnRequest() {
-        numberGamesOnRequest = findElement(xpathNumberGamesOnRequest);
-        return Integer.valueOf(
-                numberGamesOnRequest.getText().replaceAll("[^0-9]+",""));
+        numberGamesOnRequest = expectedConditions(xpathNumberGamesOnRequest);
+        if (invisibilityOfElementWithText(xpathNumberGamesOnRequest, numberOfGamesAction.getText()))
+            return webElementInInt(findElement(xpathNumberGamesOnRequest));
+
+        return 0;
     }
 
     public int getNumberGamesInList() {
         List<WebElement> gamesResultList = findElements(xpathGamesResultList);
-        return gamesResultList.size();
+        if (invisibilityOfAllElements(gamesResultList))
+            return gamesResultList.size();
+
+        return 0;
     }
 
     private String getNameFirstGame() {
-        nameFirstGameInList = findElement(xpathNameFirstGameInList);
-        return nameFirstGameInList.getText();
+        return expectedConditions(xpathNameFirstGameInList).getText();
     }
 
     private String getDateOfReleaseFirstGame() {
-        dateOfReleaseFirstGameInList = findElement(xpathDateOfReleaseFirstGameInList);
-        return dateOfReleaseFirstGameInList.getText();
+        return expectedConditions(xpathDateOfReleaseFirstGameInList).getText();
     }
 
     private String getPriceFirstGame() {
-        priceFirstGameInList= expectedConditions(xpathPriceFirstGameInList);
-        return priceFirstGameInList.getText();
+        return String.valueOf(webElementInInt(expectedConditions(xpathPriceFirstGameInList)));
     }
 }

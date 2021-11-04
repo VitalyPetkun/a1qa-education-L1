@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class AboutPage extends MethodsForSearch {
-      final private String xpathGamers = "//div[@class='online_stat']";
-      final private String xpathGutterBlock = "//div[@id='about_greeting']";
+      private final String xpathGamers = "//div[@class='online_stat']";
+      private final String xpathGutterBlock = "//div[@id='about_greeting']";
 
       private int getGamers(String status) {
             List<WebElement> gamers = findElements(xpathGamers);
