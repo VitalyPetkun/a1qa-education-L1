@@ -11,35 +11,35 @@ public class SteamTest {
     private static AboutPage aboutPage;
     private static SalesLeadersPage salesLeadersPage;
     private static GamePage gamePage;
+    private static MarketPage marketPage;
 
     @BeforeMethod
     private void setup() {
         BrowserFactory.getDriver().get(ConfigProperties.getPropertyString("URLHomePage"));
         BrowserFactory.getDriver().manage().timeouts();
     }
-/*
 
     @Test
     private void openRequiredPages() {
         homePage = new HomePage();
         aboutPage = new AboutPage();
 
-        homePage.clickPopupMenuHomePage();
+        homePage.getHeaderPage().clickPopupMenuHomePage();
         Assert.assertTrue(homePage.getUniqueElementHomePage(),
                 "Не перешел на главную страницу.");
 
-        homePage.clickButtonAbout();
+        homePage.getHeaderPage().clickButtonAbout();
         Assert.assertTrue(aboutPage.getUniqueElementAboutPage(),
                 "Не перешел на страницу \"About\".");
 
         Assert.assertTrue(aboutPage.getGamersOnline() > aboutPage.getGamersInGame(),
                 "Число игроков онлайн меньше, чем в игре.");
 
-        homePage.clickSubMenuStore();
+        homePage.getHeaderPage().clickSubMenuStore();
         Assert.assertTrue(homePage.getUniqueElementHomePage(),
                 "Не перешел на страницу магазина.");
     }
-*/
+
 
     @Test
     private void samplesOfGames() {
@@ -47,7 +47,7 @@ public class SteamTest {
         salesLeadersPage = new SalesLeadersPage();
         gamePage = new GamePage();
 
-        homePage.clickPopupMenuHomePage();
+        homePage.getHeaderPage().clickPopupMenuHomePage();
         Assert.assertTrue(homePage.getUniqueElementHomePage(),
                 "Не перешел на главную страницу.");
 
@@ -72,8 +72,10 @@ public class SteamTest {
                 "Чекбокс \"Экшен\" в блоке \"Метки\" не выбран.");
         Assert.assertTrue(numberOfActionGames == numberGamesOnRequest,
                 "Количество игр в списке не соответствует количеству игр с меткой \"Экшен\"");
+
         Assert.assertTrue( numberOfActionGames == numberGamesInList,
                 "Указанное количество результатов по запросу не соответствует количеству игр с меткой \"Экшен\"");
+
 
         List<String> infoFirstGame = salesLeadersPage.getInfoFirstGame();
         salesLeadersPage.clickFirstGame();
@@ -83,6 +85,22 @@ public class SteamTest {
                 "Не перешел на страницу с описанием игры.");
         Assert.assertTrue(infoFirstGame.containsAll(infoGame) && infoGame.containsAll(infoFirstGame),
                 "Название игры, дата релиза и цена в списке результатов не соответствуем на странице с описанием игры");
+    }
+
+
+    @Test
+    private void searchFilters() {
+        homePage = new HomePage();
+        marketPage = new MarketPage();
+
+        homePage.getHeaderPage().clickPopupMenuHomePage();
+        Assert.assertTrue(homePage.getUniqueElementHomePage(),
+                "Не перешел на главную страницу.");
+
+        homePage.getHeaderPage().clickPopupMenuCommunityMarketPage();
+        Assert.assertTrue(marketPage.getUniqueElementMarketPage(),
+                "Не перешел на страницу \"Community Market\".");
+
     }
 
     @AfterMethod

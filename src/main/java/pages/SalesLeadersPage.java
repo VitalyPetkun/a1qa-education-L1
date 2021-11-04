@@ -10,16 +10,12 @@ public class SalesLeadersPage extends MethodsForSearch {
     private final String xpathAdditionalSearchOptions = "//div[@id='additional_search_options']";
     private final String xpathBlockContentOS =
             "//div[@class='block search_collapse_block'][@data-collapse-name='os']//div[@class='block_content block_content_inner']";
-    private final String xpathCheckBoxSteamOSPlusLinux =
-            "//div[contains(@data-value,'linux')]/span";
-    private final String xpathBlockHeaderNumberGamers =
-            "//div[@data-collapse-name='category3']//div[@class='block_header']";
-    private final String xpathCheckBoxCooperativeLAN =
-            "//div[@data-value='48']/span";
+    private final String xpathCheckBoxSteamOSPlusLinux = "//div[contains(@data-value,'linux')]/span";
+    private final String xpathBlockHeaderNumberGamers = "//div[@data-collapse-name='category3']//div[@class='block_header']";
+    private final String xpathCheckBoxCooperativeLAN = "//div[@data-value='48']/span";
     private final String xpathBlockHeaderTags =
             "//div[contains(@class,'search_collapse_block')][@data-collapse-name='tags']//div[contains(@class,'block_header')]";
-    private final String xpathFlagSeeAll =
-            "//div[@data-collapse-name='tags']/a";
+    private final String xpathFlagSeeAll = "//div[@data-collapse-name='tags']/a";
     private final String xpathCheckBoxAction = "//div[@id='TagFilter_Container']//div[@data-param='tags'][@data-value='19']";
     private final String xpathFirstGameInList = "//div[@id='search_resultsRows']//a[contains(@class,'search_result_row')][1]";
     private final String xpathNameFirstGameInList =
@@ -28,8 +24,7 @@ public class SalesLeadersPage extends MethodsForSearch {
             "//div[@id='search_resultsRows']//a[contains(@class,'search_result_row')][1]//div[contains(@class,'search_released')]";
     private final String xpathPriceFirstGameInList =
             "//a[contains(@class,'search_result_row')][1]//div[@class='col search_price  responsive_secondrow']";
-    private final String xpathNumberOfGamesAction =
-            "//div[@data-value='19']//span[@class='tab_filter_control_count']";
+    private final String xpathNumberOfGamesAction = "//div[@data-value='19']//span[@class='tab_filter_control_count']";
     private final String xpathNumberGamesOnRequest = "//div[@id='search_results']//div[@class='search_results_count']";
     private final String xpathBlockHeaderOS =
             "//div[@class='block search_collapse_block'][@data-collapse-name='os']//div[@class='block_header']";
