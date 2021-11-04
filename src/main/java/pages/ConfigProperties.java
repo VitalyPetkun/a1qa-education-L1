@@ -31,8 +31,6 @@ public class ConfigProperties {
     }
 
     public static int getPropertyInt(String key) {
-        String strNum = PROPERTIES.getProperty(key);
-        int num = Integer.parseInt(strNum);
-        return num;
+        return Integer.parseInt(PROPERTIES.getProperty(key));
     }
 }

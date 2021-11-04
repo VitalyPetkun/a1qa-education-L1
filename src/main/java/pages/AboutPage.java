@@ -1,30 +1,33 @@
 package pages;
 
-import browser.Browser;
-import org.openqa.selenium.By;
+import browser.MethodsForSearch;
+import browser.BrowserFactory;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 
-public class AboutPage extends Base{
-      private String xpathGamersOnline = "//div[@class='online_stat']";
-      private String xpathGutterBlock = "//div[@id='about_greeting']";
-
-      private List<WebElement> gamersOnline;
-      private List<WebElement> gutterBlock;
+public class AboutPage extends MethodsForSearch {
+      final private String xpathGamers = "//div[@class='online_stat']";
+      final private String xpathGutterBlock = "//div[@id='about_greeting']";
 
       private int getGamers(String status) {
-            gamersOnline = findElements(xpathGamersOnline);
-            int returnNumber=0;
-            if(gamersOnline.size() == 0)
-                  Browser.getDriver().navigate().refresh();
-            if (status == "Gamers online") {
-                  returnNumber = Integer.valueOf(
-                          gamersOnline.get(0).getText().replaceAll("[^0-9]+",""));
+            List<WebElement> gamers = findElements(xpathGamers);
+            int returnNumber = 0;
+
+            switch (gamers.size()) {
+                  case 0:
+                        BrowserFactory.getDriver().navigate().refresh();
+                        break;
+                  default:
+                        switch (status) {
+                              case "Gamers online":
+                                    returnNumber = getNumberGamers(0, gamers);
+                                    break;
+                              case "Gamers in game":
+                                    returnNumber = getNumberGamers(1, gamers);
+                                    break;
+                        }
             }
-            if (status == "Gamers in game") {
-                  returnNumber = Integer.valueOf(
-                          gamersOnline.get(1).getText().replaceAll("[^0-9]+",""));
-            }
+
             return returnNumber;
       }
 
@@ -37,7 +40,12 @@ public class AboutPage extends Base{
       }
 
       public boolean getUniqueElementAboutPage() {
-            gutterBlock = findElements(xpathGutterBlock);
+            List<WebElement> gutterBlock = findElements(xpathGutterBlock);
             return (gutterBlock.size() > 0);
+      }
+
+      private int getNumberGamers(int number, List<WebElement> gamers) {
+            return Integer.valueOf(gamers.get(number).
+                    getText().replaceAll("[^0-9]+",""));
       }
 }
