@@ -12,6 +12,7 @@ public class SteamTest {
     private static SalesLeadersPage salesLeadersPage;
     private static GamePage gamePage;
     private static MarketPage marketPage;
+    private static ItemClass itemClass;
 
     @BeforeMethod
     private void setup() {
@@ -92,6 +93,7 @@ public class SteamTest {
     private void searchFilters() {
         homePage = new HomePage();
         marketPage = new MarketPage();
+        itemClass = new ItemClass();
 
         homePage.getHeaderPage().clickPopupMenuHomePage();
         Assert.assertTrue(homePage.getUniqueElementHomePage(),
@@ -101,6 +103,29 @@ public class SteamTest {
         Assert.assertTrue(marketPage.getUniqueElementMarketPage(),
                 "Не перешел на страницу \"Community Market\".");
 
+        marketPage.clickShowAdvancedOptions();
+        Assert.assertTrue(marketPage.getUniqueElementShowAdvancedOptions(),
+                "Форма SEARCH COMMUNITY MARKET не открыта.");
+
+        marketPage.choosingSearchParameters();
+        marketPage.clickButtonSearch();
+
+        Assert.assertTrue(marketPage.checkFiltersSearch(),
+                "Не появились следующие фильтры поиска: Dota 2 – Lifestealer – Immortal – golden");
+        Assert.assertTrue(marketPage.checkSearchResults(),
+                        "Первые пять результатов не содержат слово \"Golden\" в названии.");
+
+        marketPage.deleteFilters();
+        Assert.assertTrue(marketPage.listUpdated(), "Список предметов не обновился.");
+
+        String nameFirstItem = marketPage.getNameFirstItem();
+        marketPage.clickFirstItem();
+        Assert.assertTrue(itemClass.checkFilters(),
+                "Информация на странице предмета не соответствует фильтрам.");
+
+        String nameItem = itemClass.getName();
+        Assert.assertTrue(nameFirstItem.equals(nameItem),
+                "Название предмета с предыдущей страницы не соответствует.");
     }
 
     @AfterMethod
