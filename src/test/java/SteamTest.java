@@ -1,7 +1,6 @@
 import browser.BrowserFactory;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import org.testng.collections.CollectionUtils;
 import pages.*;
 
 import java.util.List;
@@ -26,19 +25,19 @@ public class SteamTest {
         aboutPage = new AboutPage();
 
         homePage.getHeaderPage().clickPopupMenuHomePage();
-        Assert.assertTrue(homePage.getUniqueElementHomePage(),
-                "Не перешел на главную страницу.");
+        Assert.assertTrue((homePage.getUniqueElementHomePage() > 0),
+                "Didn't go to the Home page.");
 
         homePage.getHeaderPage().clickButtonAbout();
-        Assert.assertTrue(aboutPage.getUniqueElementAboutPage(),
-                "Не перешел на страницу \"About\".");
+        Assert.assertTrue((aboutPage.getUniqueElementAboutPage() > 0),
+                "Didn't go to the About page.");
 
         Assert.assertTrue(aboutPage.getGamersOnline() > aboutPage.getGamersInGame(),
-                "Число игроков онлайн меньше, чем в игре.");
+                "The number of players online is less than in the game.");
 
-        homePage.getHeaderPage().clickSubMenuStore();
-        Assert.assertTrue(homePage.getUniqueElementHomePage(),
-                "Не перешел на страницу магазина.");
+        aboutPage.getHeaderPage().clickSubMenuStore();
+        Assert.assertTrue((homePage.getUniqueElementHomePage() > 0),
+                "Didn't go to the Home page.");
     }
 
 
@@ -47,85 +46,111 @@ public class SteamTest {
         homePage = new HomePage();
         salesLeadersPage = new SalesLeadersPage();
         gamePage = new GamePage();
+        int numberGamesOnRequestBeforeClickCheckBoxAction;
+        int numberOfActionGames;
+        int numberGamesOnRequestAfterClickCheckBoxAction;
 
         homePage.getHeaderPage().clickPopupMenuHomePage();
-        Assert.assertTrue(homePage.getUniqueElementHomePage(),
-                "Не перешел на главную страницу.");
+        Assert.assertTrue((homePage.getUniqueElementHomePage() > 0),
+                "Didn't go to the Home page.");
 
         homePage.clickPopupMenuSalesLeaders();
-        Assert.assertTrue(salesLeadersPage.getUniqueElementSalesLeadersPage(),
-                "Не перешел на страницу \"Лидеры продаж\".");
+        Assert.assertTrue((salesLeadersPage.getUniqueElementSalesLeadersPage() > 0),
+                "Didn't go to the Top Sellers page.");
 
         salesLeadersPage.clickCheckBoxSteamOSPlusLinux();
         Assert.assertTrue(salesLeadersPage.statusCheckBoxSteamOSPlusLinux(),
-                "Чекбокс \"SteamOS + Linux\" в блоке \"Операционная система\" не выбран.");
+                "CheckBox 'SteamOS + Linux' in the block 'OS' not selected.");
 
         salesLeadersPage.clickCheckBoxCooperativeLAN();
         Assert.assertTrue(salesLeadersPage.statusCheckBoxCooperativeLAN(),
-                "Чекбокс \"Кооператив (LAN)\" в блоке \"Количество игроков\" не выбран.");
+                "CheckBox 'Cooperative (LAN)' in the block 'Number of players' not selected.");
 
-        int numberOfActionGames = salesLeadersPage.getNumberOfActionGames();
+        numberGamesOnRequestBeforeClickCheckBoxAction = salesLeadersPage.getNumberGamesOnRequest();
+        numberOfActionGames = salesLeadersPage.getNumberOfActionGames();
+
         salesLeadersPage.clickCheckBoxAction();
-        int numberGamesInList = salesLeadersPage.getNumberGamesInList();
-        int numberGamesOnRequest = salesLeadersPage.getNumberGamesOnRequest();
-
         Assert.assertTrue(salesLeadersPage.statusCheckBoxAction(),
-                "Чекбокс \"Экшен\" в блоке \"Метки\" не выбран.");
-        Assert.assertTrue(numberOfActionGames == numberGamesOnRequest,
-                "Количество игр в списке не соответствует количеству игр с меткой \"Экшен\"");
+                "CheckBox 'Action' in the block 'Tags' not selected.");
 
-        Assert.assertTrue( numberOfActionGames == numberGamesInList,
-                "Указанное количество результатов по запросу не соответствует количеству игр с меткой \"Экшен\"");
+        numberGamesOnRequestAfterClickCheckBoxAction = salesLeadersPage.getNumberGamesOnRequest();
 
+        while (numberGamesOnRequestBeforeClickCheckBoxAction == numberGamesOnRequestAfterClickCheckBoxAction) {
+            numberGamesOnRequestAfterClickCheckBoxAction = salesLeadersPage.getNumberGamesOnRequest();
+        }
+
+        Assert.assertTrue(numberOfActionGames == numberGamesOnRequestAfterClickCheckBoxAction,
+                "The number of games in the list does not match the number of games with a tag 'Action'.");
+
+        Assert.assertTrue(numberOfActionGames == salesLeadersPage.getNumberGamesInList(),
+                "The specified number of results for the request does not match the number of games with the tag 'Action'.");
 
         List<String> infoFirstGame = salesLeadersPage.getInfoFirstGame();
         salesLeadersPage.clickFirstGame();
         List<String> infoGame = gamePage.getInfoWithGamePage();
 
         Assert.assertTrue(gamePage.getUniqueElementGamePage(),
-                "Не перешел на страницу с описанием игры.");
+                "Didn't go to the page with the description of the game.");
         Assert.assertTrue(infoFirstGame.containsAll(infoGame) && infoGame.containsAll(infoFirstGame),
-                "Название игры, дата релиза и цена в списке результатов не соответствуем на странице с описанием игры");
+                "Game name, release date and price in the results list do not match on the game description page.");
     }
-
 
     @Test
     private void searchFilters() {
         homePage = new HomePage();
         marketPage = new MarketPage();
         itemClass = new ItemClass();
+        String resultsBeforeUpdated;
+        String nameFirstItem;
+        String nameItem;
 
         homePage.getHeaderPage().clickPopupMenuHomePage();
-        Assert.assertTrue(homePage.getUniqueElementHomePage(),
-                "Не перешел на главную страницу.");
+        Assert.assertTrue((homePage.getUniqueElementHomePage() > 0),
+                "Didn't go to the Home page.");
 
         homePage.getHeaderPage().clickPopupMenuCommunityMarketPage();
-        Assert.assertTrue(marketPage.getUniqueElementMarketPage(),
-                "Не перешел на страницу \"Community Market\".");
+        Assert.assertTrue((marketPage.getUniqueElementMarketPage() > 0),
+                "Didn't go to the Community Market page.");
 
         marketPage.clickShowAdvancedOptions();
-        Assert.assertTrue(marketPage.getUniqueElementShowAdvancedOptions(),
-                "Форма SEARCH COMMUNITY MARKET не открыта.");
+        Assert.assertTrue((marketPage.getUniqueElementShowAdvancedOptions() > 0),
+                "The form SEARCH COMMUNITY MARKET not open.");
 
         marketPage.choosingSearchParameters();
         marketPage.clickButtonSearch();
 
-        Assert.assertTrue(marketPage.checkFiltersSearch(),
-                "Не появились следующие фильтры поиска: Dota 2 – Lifestealer – Immortal – golden");
-        Assert.assertTrue(marketPage.checkSearchResults(),
-                        "Первые пять результатов не содержат слово \"Golden\" в названии.");
+        Assert.assertTrue(marketPage.checkFiltersSearch(ConfigProperties.getPropertyString("filtersSearchGame"))
+                        .equals(ConfigProperties.getPropertyString("filtersSearchGame")),
+                "Search filter did not appear - Dota 2");
+        Assert.assertTrue(marketPage.checkFiltersSearch(ConfigProperties.getPropertyString("filtersSearchHero"))
+                        .equals(ConfigProperties.getPropertyString("filtersSearchHero")),
+                "Search filter did not appear - Lifestealer");
+        Assert.assertTrue(marketPage.checkFiltersSearch(ConfigProperties.getPropertyString("filtersSearchRarity"))
+                        .equals(ConfigProperties.getPropertyString("filtersSearchRarity")),
+                "Search filter did not appear - Immortal");
+        Assert.assertTrue(marketPage.checkFiltersSearch(ConfigProperties.getPropertyString("searchParameter"))
+                        .equals(ConfigProperties.getPropertyString("searchParameter")),
+                "Search filter did not appear - golden");
+        for (int i = 0; i < ConfigProperties.getPropertyInt("numberItemForCheckSearchParameter"); i++) {
+            Assert.assertTrue(marketPage.checkSearchResults(i).contains("Golden"),
+                    "The first five results do not contain a word 'Golden' in the title.");
+        }
 
+        resultsBeforeUpdated = marketPage.getResultsBeforeUpdated();
         marketPage.deleteFilters();
-        Assert.assertTrue(marketPage.listUpdated(), "Список предметов не обновился.");
+        Assert.assertTrue((resultsBeforeUpdated != marketPage.listUpdated()), "The list of items has not been updated.");
 
-        String nameFirstItem = marketPage.getNameFirstItem();
+        nameFirstItem = marketPage.getNameFirstItem();
         marketPage.clickFirstItem();
-        Assert.assertTrue(itemClass.checkFilters(),
-                "Информация на странице предмета не соответствует фильтрам.");
-
-        String nameItem = itemClass.getName();
+        Assert.assertTrue(itemClass.checkFilters(ConfigProperties.getPropertyString("filtersSearchHero"))
+                        .contains(ConfigProperties.getPropertyString("filtersSearchHero")),
+                "Information on the item page does not match the filter - Lifestealer");
+        Assert.assertTrue(itemClass.checkFilters(ConfigProperties.getPropertyString("filtersSearchRarity"))
+                        .contains(ConfigProperties.getPropertyString("filtersSearchRarity")),
+                "Information on the item page does not match the filter - Immortal");
+        nameItem = itemClass.getNameItem();
         Assert.assertTrue(nameFirstItem.equals(nameItem),
-                "Название предмета с предыдущей страницы не соответствует.");
+                "Item name from the previous page does not match.");
     }
 
     @AfterMethod

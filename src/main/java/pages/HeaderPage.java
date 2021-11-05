@@ -6,16 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 public class HeaderPage extends MethodsForSearch{
-    private final String xpathBtnAbout = "//div[@class='supernav_container']//a[@class='menuitem'][1]";
-    private final String xpathSubmenuStore =
-            "//div[@class='supernav_container']//a[contains(@data-tooltip-content,'submenu_store')]";
-    private final String xpathSubmenuCommunity =
-            "//div[@class='supernav_container']//a[contains(@data-tooltip-content,'submenu_community')]";
-    private final String xpathPopupMenuHomePage =
-            "//div[@class='supernav_content']//div[@class='submenu_store']//a[@href='https://store.steampowered.com/?snr=1_4_4__global-header']";
-    private final String xpathPopupMenuMarketPage =
-            "//div[@class='supernav_content']//div[@class='submenu_community']/a[@href='https://steamcommunity.com/market/']";
-
+    private final String xpathBtnAbout = "//div[@class='supernav_container']/a[3]";
+    private final String xpathSubmenuStore = "//div[@class='supernav_container']//a[contains(@data-tooltip-content,'submenu_store')]";
+    private final String xpathSubmenuCommunity = "//div[@class='supernav_container']//a[contains(@data-tooltip-content,'submenu_community')]";
+    private final String xpathPopupMenuHomePage = "//div[@class='supernav_content']//div[@class='submenu_store']//a[1]";
+    private final String xpathPopupMenuMarketPage = "//div[@class='supernav_content']//div[@class='submenu_community']/a[4]";
 
     private WebElement btnAbout;
     private WebElement submenuStore;

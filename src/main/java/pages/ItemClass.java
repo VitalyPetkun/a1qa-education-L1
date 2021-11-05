@@ -8,24 +8,24 @@ public class ItemClass extends MethodsForSearch {
     private final String xpathFilterRarity = "//div[@id='largeiteminfo_item_type']";
     private final String xpathFilterHero = "//div[@id='largeiteminfo_item_descriptors']/div[1]";
 
-
-    private WebElement name;
+    private WebElement nameItem;
     private WebElement filterRarity;
     private WebElement filterHero;
 
-
-    public String getName() {
-        name = findElement(xpathName);
-        return (name.getText());
+    public String getNameItem() {
+        nameItem = findElement(xpathName);
+        return (nameItem.getText());
     }
 
-    public boolean checkFilters() {
-        boolean check = false;
-        filterHero = findElement(xpathFilterHero);
-        filterRarity = findElement(xpathFilterRarity);
-        if((filterHero.getText().contains(ConfigProperties.getPropertyString("filtersSearchHero"))) &&
-                filterRarity.getText().contains(ConfigProperties.getPropertyString("filtersSearchRarity")))
-            check = true;
-        return check;
+    public String checkFilters(String filter) {
+        switch (filter) {
+            case "filtersSearchHero":
+                filterHero = findElement(xpathFilterHero);
+                return filterHero.getText();
+            case "filtersSearchRarity":
+                filterRarity = findElement(xpathFilterRarity);
+                return filterRarity.getText();
+        }
+        return filter;
     }
 }

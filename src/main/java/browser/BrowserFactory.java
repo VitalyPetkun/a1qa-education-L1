@@ -19,7 +19,6 @@ public class BrowserFactory {
             browser = new BrowserFactory();
             setupsBrowser();
         }
-
         return driver;
     }
 

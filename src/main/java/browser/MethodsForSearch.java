@@ -20,11 +20,6 @@ public class MethodsForSearch {
                 .until(ExpectedConditions.invisibilityOfElementWithText(By.xpath(xpath), originalText));
     }
 
-    public boolean invisibilityOfAllElements(List<WebElement> elementList) {
-        return new WebDriverWait(BrowserFactory.getDriver(), Duration.ofSeconds(ConfigProperties.getPropertyInt("waitingTime")))
-                .until(ExpectedConditions.invisibilityOfAllElements(elementList));
-    }
-
     public WebElement findElement(String xpath) {
         return BrowserFactory.getDriver().findElement(By.xpath(xpath));
     }

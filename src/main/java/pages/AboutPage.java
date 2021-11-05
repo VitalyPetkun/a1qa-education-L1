@@ -9,10 +9,15 @@ public class AboutPage extends MethodsForSearch {
       private final String xpathGamers = "//div[@class='online_stat']";
       private final String xpathGutterBlock = "//div[@id='about_greeting']";
 
+      private HeaderPage headerPage;
+
+      public AboutPage() {
+            headerPage = new HeaderPage();
+      }
+
       private int getGamers(String status) {
             List<WebElement> gamers = findElements(xpathGamers);
             int returnNumber = 0;
-
             switch (gamers.size()) {
                   case 0:
                         BrowserFactory.getDriver().navigate().refresh();
@@ -20,14 +25,13 @@ public class AboutPage extends MethodsForSearch {
                   default:
                         switch (status) {
                               case "Gamers online":
-                                    returnNumber = getNumberGamers(0, gamers);
+                                    returnNumber = webElementInInt(gamers.get(0));
                                     break;
                               case "Gamers in game":
-                                    returnNumber = getNumberGamers(1, gamers);
+                                    returnNumber = webElementInInt(gamers.get(1));
                                     break;
                         }
             }
-
             return returnNumber;
       }
 
@@ -39,13 +43,12 @@ public class AboutPage extends MethodsForSearch {
             return getGamers("Gamers in game");
       }
 
-      public boolean getUniqueElementAboutPage() {
+      public int getUniqueElementAboutPage() {
             List<WebElement> gutterBlock = findElements(xpathGutterBlock);
-            return (gutterBlock.size() > 0);
+            return gutterBlock.size();
       }
 
-      private int getNumberGamers(int number, List<WebElement> gamers) {
-            return Integer.valueOf(gamers.get(number).
-                    getText().replaceAll("[^0-9]+",""));
+      public HeaderPage getHeaderPage() {
+            return headerPage;
       }
 }

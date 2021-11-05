@@ -20,7 +20,7 @@ public class MarketPage extends MethodsForSearch {
     private final String xpathSearchResults = "//div[@id='searchResultsRows']//a//span[contains(@class,'market_listing_item_name')]";
     private final String xpathDeleteDota2 = "//div/a[@class='market_searchedForTerm'][1]/span";
     private final String xpathDeleteInputSearch = "//div/a[@class='market_searchedForTerm'][4]/span";
-    private final String xpathResultsTotal = "//span[@id='searchResults_total']";
+    private final String xpathResults = "//span[@id='searchResults_total']";
     private final String xpathFirstItem = "//span[@id='result_0_name']";
 
     private WebElement showAdvancedOptions;
@@ -33,9 +33,9 @@ public class MarketPage extends MethodsForSearch {
     private WebElement deleteDota2;
     private WebElement deleteInputSearch;
     private WebElement buttonSearch;
-    private WebElement resultsTotalUpdated;
+    private WebElement resultsAfterUpdated;
     private WebElement firstItem;
-    private String resultsTotal;
+    private String strResultsBeforeUpdated;
 
     public String getNameFirstItem() {
         firstItem = expectedConditions(xpathFirstItem);
@@ -47,14 +47,18 @@ public class MarketPage extends MethodsForSearch {
         firstItem.click();
     }
 
-    public boolean listUpdated() {
-        resultsTotalUpdated = expectedConditions(xpathResultsTotal);
-        return (resultsTotal != resultsTotalUpdated.getText());
+    public String listUpdated() {
+        resultsAfterUpdated = expectedConditions(xpathResults);
+        return resultsAfterUpdated.getText();
+    }
+
+    public String getResultsBeforeUpdated() {
+        resultsAfterUpdated = expectedConditions(xpathResults);
+        strResultsBeforeUpdated = resultsAfterUpdated.getText();
+        return strResultsBeforeUpdated;
     }
 
     public void deleteFilters() {
-        resultsTotalUpdated = expectedConditions(xpathResultsTotal);
-        resultsTotal = resultsTotalUpdated.getText();
         deleteInputSearch = expectedConditions(xpathDeleteInputSearch);
         deleteInputSearch.click();
         deleteDota2 = expectedConditions(xpathDeleteDota2);
@@ -66,51 +70,41 @@ public class MarketPage extends MethodsForSearch {
         showAdvancedOptions.click();
     }
 
-    public boolean checkSearchResults() {
+    public String checkSearchResults(int index) {
         List<WebElement> searchResults = findElements(xpathSearchResults);
-        boolean result = false;
-        int check = 0;
-        for (int i = 0; i < 5; i++) {
-            if (searchResults.get(i).getText().contains("Golden"))
-                check++;
-        }
-        if (check == 5)
-            return true;
-        return result;
+        return searchResults.get(index).getText();
     }
 
-
-    public boolean checkFiltersSearch() {
+    public String checkFiltersSearch(String filter) {
         List<WebElement> filtersSearch = findElements(xpathFiltersSearch);
-        int check = 0;
-        boolean result = false;
-
-        check = check + checkFilters(filtersSearch, "filtersSearchGame");
-        check = check + checkFilters(filtersSearch, "filtersSearchGame");
-        check = check + checkFilters(filtersSearch, "filtersSearchGame");
-        check = check + checkFilters(filtersSearch, "filtersSearchGame");
-
-        if (check == 4)
-            result = true;
-        return result;
+        switch (filter) {
+            case "filtersSearchGame":
+                return filtersSearch.get(0).getText();
+            case "filtersSearchHero":
+                return filtersSearch.get(1).getText();
+            case "filtersSearchRarity":
+                return filtersSearch.get(2).getText();
+            case "searchParameter":
+                return filtersSearch.get(3).getText();
+        }
+        return filter;
     }
 
     public void choosingSearchParameters() {
-        game();
-        hero();
-        rarity();
-        search();
+        setFilterGame();
+        setFilterHero();
+        setFilterRarity();
+        setFilterSearch();
     }
 
-
-    public boolean getUniqueElementShowAdvancedOptions() {
+    public int getUniqueElementShowAdvancedOptions() {
         List<WebElement> advancedSearch = findElements(xpathAdvancedSearch);
-        return (advancedSearch.size() > 0);
+        return advancedSearch.size();
     }
 
-    public boolean getUniqueElementMarketPage() {
+    public int getUniqueElementMarketPage() {
         List<WebElement> gutterBlock = findElements(xpathFindItems);
-        return (gutterBlock.size() > 0);
+        return gutterBlock.size();
     }
 
     public void clickButtonSearch() {
@@ -118,52 +112,27 @@ public class MarketPage extends MethodsForSearch {
         buttonSearch.click();
     }
 
-    private void game() {
+    private void setFilterGame() {
         selectedGame = expectedConditions(xpathSelectedGame);
         selectedGame.click();
         dota2 = expectedConditions(xpathDota2);
         dota2.click();
     }
 
-    private void hero() {
+    private void setFilterHero() {
         selectedHero = expectedConditions(xpathSelectedHero);
         selectedHero.click();
         lifestealer = expectedConditions(xpathLifestealer);
         lifestealer.click();
     }
 
-    private void rarity() {
+    private void setFilterRarity() {
         selectedRarity = expectedConditions(xpathSelectedRarity);
         selectedRarity.click();
     }
 
-    private void search() {
+    private void setFilterSearch() {
         inputSearch = expectedConditions(xpathInputSearch);
         inputSearch.sendKeys(ConfigProperties.getPropertyString("searchParameter"));
     }
-
-    private int checkFilters(List<WebElement> list, String filter) {
-        int ret = 0;
-
-        switch (filter) {
-            case "filtersSearchGame":
-                if (list.get(0).getText().equals(ConfigProperties.getPropertyString(filter)))
-                    ret = 1;
-                break;
-            case "filtersSearchHero":
-                if (list.get(1).getText().equals(ConfigProperties.getPropertyString(filter)))
-                    ret = 1;
-                break;
-            case "filtersSearchRarity":
-                if (list.get(2).getText().equals(ConfigProperties.getPropertyString(filter)))
-                    ret = 1;
-                break;
-            case "searchParameter":
-                if (list.get(3).getText().equals(ConfigProperties.getPropertyString(filter)))
-                    ret = 1;
-                break;
-        }
-        return ret;
-    }
-
 }

@@ -11,7 +11,6 @@ public class HomePage extends MethodsForSearch {
     private final String xpathPopupMenuSalesLeaders = "//div[@id='noteworthy_flyout']//a[@class='popup_menu_item'][1]";
     private final String xpathGutterBlock = "//div[@class='home_page_gutter_block']";
 
-
     private WebElement noteworthyTab;
     private WebElement popupMenuSalesLeaders;
     private HeaderPage headerPage;
@@ -28,9 +27,9 @@ public class HomePage extends MethodsForSearch {
         popupMenuSalesLeaders.click();
     }
 
-    public boolean getUniqueElementHomePage() {
+    public int getUniqueElementHomePage() {
         List<WebElement> gutterBlock= findElements(xpathGutterBlock);
-        return (gutterBlock.size() > 0);
+        return gutterBlock.size();
     }
 
     public HeaderPage getHeaderPage() {
