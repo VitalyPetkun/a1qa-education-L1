@@ -1,10 +1,10 @@
-package pages;
+package Utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ConfigProperties {
+public class ConfigManager {
     protected static FileInputStream fileInputStream;
     protected static Properties PROPERTIES;
     static {
