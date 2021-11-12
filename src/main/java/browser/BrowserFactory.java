@@ -7,11 +7,11 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
-import Utils.ConfigManager;
+import utils.ConfigManager;
 
-public class BrowserFactory {
-    protected static void factoryMethod(WebDriver driver) {
-        switch (ConfigManager.getPropertyString("nameBrowser")) {
+abstract class BrowserFactory {
+    protected static WebDriver factoryMethod(WebDriver driver) {
+        switch (ConfigManager.getConfigString("nameBrowser")) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
@@ -32,6 +32,9 @@ public class BrowserFactory {
                 WebDriverManager.safaridriver().setup();
                 driver = new SafariDriver();
                 break;
+            default:
+
         }
+        return driver;
     }
 }

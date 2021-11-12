@@ -2,7 +2,7 @@ package browser;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import Utils.ConfigManager;
+import utils.ConfigManager;
 
 public class Browser extends BrowserFactory{
     private static WebDriver driver;
@@ -17,20 +17,20 @@ public class Browser extends BrowserFactory{
     }
 
     private static WebDriver setUpDriver() {
-        factoryMethod(driver);
-        setSize();
+        driver = factoryMethod(driver);
+        driver = setSize();
         driver.manage().timeouts();
         return driver;
     }
 
-    private static void setSize() {
-        driver.manage().window().setSize(new Dimension(
-                ConfigManager.getPropertyInt("widthFrameBrowser"),
-                ConfigManager.getPropertyInt("heightFrameBrowser")));
+    private static WebDriver setSize() {
+        driver.manage().window().maximize();
+        return driver;
     }
 
-    public static void openUrl(String url) {
-        driver.get(url);
+    public static WebDriver openUrl(String url) {
+        getDriver().get(url);
+        return getDriver();
     }
 
     public static void quit() {

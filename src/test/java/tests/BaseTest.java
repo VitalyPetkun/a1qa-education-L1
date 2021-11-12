@@ -1,17 +1,17 @@
 package tests;
 
-import Utils.ConfigManager;
+import utils.ConfigManager;
 import browser.Browser;
 import org.testng.annotations.*;
 
 public class BaseTest {
     @BeforeMethod
-    private void setup() {
-        Browser.openUrl(ConfigManager.getPropertyString("URLHomePage"));
+    protected void setup() {
+        Browser.openUrl(ConfigManager.getConfigString("URLHomePage"));
     }
 
     @AfterMethod
-    private void quitDriver() {
+    protected void quitDriver() {
         Browser.quit();
     }
 }

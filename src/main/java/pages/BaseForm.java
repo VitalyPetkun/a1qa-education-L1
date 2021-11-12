@@ -1,14 +1,18 @@
 package pages;
 
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
+import elements.WebTable;
 
 abstract class BaseForm {
-    private List<WebElement> uniqElement;
-    private String pageName;
+    private String uniqElement;
+    private String formName;
 
-    private boolean isPageOpen() {
-        return uniqElement.size() > 0;
+    BaseForm(String uniqElement, String formName) {
+        this.uniqElement = uniqElement;
+        this.formName = formName;
+    }
+
+    public boolean isPageOpen() {
+        WebTable list = new WebTable(uniqElement, "uniqElement" + formName);
+        return list.isDisplayed();
     }
 }

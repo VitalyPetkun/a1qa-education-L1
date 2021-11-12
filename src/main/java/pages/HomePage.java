@@ -1,18 +1,24 @@
 package pages;
 
-import browser.BrowserFactory;
+import browser.Browser;
+import elements.Button;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import java.util.List;
 
 public class HomePage extends BaseForm{
-    private HeaderMenu headerMenu;
+    private Button btnAlertsWindows;
 
     public HomePage() {
-        headerMenu = new HeaderMenu();
+        super("//div[@class='category-cards']", "Home Page");
     }
 
     public HeaderMenu getHeaderMenu() {
-        return headerMenu;
+        return new HeaderMenu();
+    }
+
+    public void clickBtnAlertsFrameAndWindowsHome() {
+        btnAlertsWindows = new Button(".//*[@fill-rule='evenodd']//ancestor::div[contains(@class,'top-card')]//div[@class='card-up']",
+                "btnAlertsWindows");
+        btnAlertsWindows.click();
     }
 }
