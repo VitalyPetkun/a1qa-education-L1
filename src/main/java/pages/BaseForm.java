@@ -11,8 +11,8 @@ abstract class BaseForm {
         this.formName = formName;
     }
 
-    public boolean isPageOpen() {
-        WebTable list = new WebTable(uniqElement, "uniqElement" + formName);
-        return list.isDisplayed();
+    public boolean isFormOpen() {
+        WebTable list = new WebTable(uniqElement, "uniqElement " + formName);
+        return list.isPresentUniqElement();
     }
 }

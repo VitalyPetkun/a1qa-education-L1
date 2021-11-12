@@ -1,8 +1,8 @@
 package browser;
 
-import org.openqa.selenium.Dimension;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import utils.ConfigManager;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Browser extends BrowserFactory{
     private static WebDriver driver;
@@ -17,7 +17,12 @@ public class Browser extends BrowserFactory{
     }
 
     private static WebDriver setUpDriver() {
-        driver = factoryMethod(driver);
+        try {
+            driver = factoryMethod(driver);
+        } catch (NullPointerException ex) {
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+        }
         driver = setSize();
         driver.manage().timeouts();
         return driver;

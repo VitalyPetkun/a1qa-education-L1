@@ -39,4 +39,8 @@ public class AlertsForm extends BaseForm{
         btnPromt = new Button("//button[@id='promtButton']", "btnPromt");
         btnPromt.click();
     }
+
+    public AlertForm getAlertForm() {
+        return new AlertForm();
+    }
 }

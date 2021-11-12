@@ -10,7 +10,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import utils.ConfigManager;
 
 abstract class BrowserFactory {
-    protected static WebDriver factoryMethod(WebDriver driver) {
+    protected static WebDriver factoryMethod(WebDriver driver) throws NullPointerException{
         switch (ConfigManager.getConfigString("nameBrowser")) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
@@ -33,7 +33,7 @@ abstract class BrowserFactory {
                 driver = new SafariDriver();
                 break;
             default:
-
+                throw new NullPointerException("Incorrect browser name.");
         }
         return driver;
     }

@@ -1,6 +1,6 @@
 package pages;
 
-import elements.Alert;
+import browser.Alert;
 
 public class AlertForm {
     private Alert alert;

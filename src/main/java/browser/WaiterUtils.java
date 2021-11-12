@@ -1,4 +1,4 @@
-package elements;
+package browser;
 
 import browser.Browser;
 import org.openqa.selenium.Alert;
@@ -11,17 +11,17 @@ import utils.ConfigManager;
 import java.time.Duration;
 
 public class WaiterUtils {
-    protected WebElement elementToBeClickable(String xpath) {
+    public static WebElement elementToBeClickable(String xpath) {
         return new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(ConfigManager.getConfigInt("waitingTime")))
                 .until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
     }
 
-    protected boolean invisibilityOfElementWithText(String xpath, String originalText) {
+    public static boolean invisibilityOfElementWithText(String xpath, String originalText) {
         return new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(ConfigManager.getConfigInt("waitingTime")))
                 .until(ExpectedConditions.invisibilityOfElementWithText(By.xpath(xpath), originalText));
     }
 
-    protected Alert alertIsPresent() {
+    public static Alert alertIsPresent() {
         return new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(ConfigManager.getConfigInt("waitingTime")))
                 .until(ExpectedConditions.alertIsPresent());
     }

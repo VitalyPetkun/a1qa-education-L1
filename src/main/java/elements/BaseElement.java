@@ -1,12 +1,14 @@
 package elements;
 
 import browser.Browser;
+import browser.WaiterUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.Alert;
+
 import java.util.List;
 
-abstract class BaseElement extends WaiterUtils{
+abstract class BaseElement{
     private String locator;
     private String elementName;
 
@@ -32,7 +34,8 @@ abstract class BaseElement extends WaiterUtils{
     }
 
     public void click() {
-        WebElement element = elementToBeClickable(locator);
+        WebElement element = WaiterUtils.elementToBeClickable(locator);
+        ((JavascriptExecutor) Browser.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
         element.click();
     }
 
@@ -41,4 +44,13 @@ abstract class BaseElement extends WaiterUtils{
         return element.getText();
     }
 
+    public boolean isPresentUniqElement() {
+        List<WebElement> list = findElements(locator);
+        return list.size() > 0;
+    }
+
+    public void switchToFrame() {
+        WebElement element = findElement(locator);
+        Browser.getDriver().switchTo().frame(element);
+    }
 }
