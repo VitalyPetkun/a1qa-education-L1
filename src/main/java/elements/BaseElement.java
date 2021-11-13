@@ -5,6 +5,7 @@ import browser.WaiterUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import utils.MyLogger;
 
 import java.util.List;
 
@@ -17,10 +18,6 @@ abstract class BaseElement{
         this.elementName = elementName;
     }
 
-    BaseElement(String elementName) {
-        this.elementName = elementName;
-    }
-
     protected WebElement findElement(String xpath) {
         return Browser.getDriver().findElement(By.xpath(xpath));
     }
@@ -29,28 +26,26 @@ abstract class BaseElement{
         return Browser.getDriver().findElements(By.xpath(xpath));
     }
 
-    public boolean isDisplayed() {
-        return findElement(locator).isDisplayed();
-    }
-
     public void click() {
-        WebElement element = WaiterUtils.elementToBeClickable(locator);
-        ((JavascriptExecutor) Browser.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
-        element.click();
+        try {
+            WebElement element = WaiterUtils.elementToBeClickable(locator);
+            ((JavascriptExecutor) Browser.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
+            element.click();
+            MyLogger.logInfo("click " + elementName + ".");
+        } catch (Exception ex) {
+            MyLogger.logError("not click " + elementName + ".");
+        }
     }
 
     public String getText() {
-        WebElement element = findElement(locator);
-        return element.getText();
+        return findElement(locator).getText();
     }
 
     public boolean isPresentUniqElement() {
-        List<WebElement> list = findElements(locator);
-        return list.size() > 0;
+        return findElements(locator).size() > 0;
     }
 
     public void switchToFrame() {
-        WebElement element = findElement(locator);
-        Browser.getDriver().switchTo().frame(element);
+        Browser.getDriver().switchTo().frame(findElement(locator));
     }
 }

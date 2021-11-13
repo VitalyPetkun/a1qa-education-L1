@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import pages.AlertsWindowsPage;
 import pages.HomePage;
 import utils.ConfigManager;
+import utils.MyLogger;
 
 public class IframeTest extends BaseTest{
     private HomePage homePage;
@@ -12,6 +13,8 @@ public class IframeTest extends BaseTest{
 
     @Test
     public void checkIframe() {
+        MyLogger.logInfo("Start IframeTest.");
+
         homePage = new HomePage();
         alertsWindowsPage = new AlertsWindowsPage();
 
@@ -37,5 +40,7 @@ public class IframeTest extends BaseTest{
                         .contains(alertsWindowsPage.getFramesForm().getTextBottomFrame()),
                 "The text from the top frame does not match the text from the bottom.");
         alertsWindowsPage.getFramesForm().switchToDefaultContent();
+
+        MyLogger.logInfo("Finish IframeTest.");
     }
 }

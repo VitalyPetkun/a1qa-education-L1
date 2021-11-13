@@ -6,15 +6,15 @@ import org.apache.logging.log4j.Logger;
 public class MyLogger {
     private static final Logger logger = LogManager.getLogger(MyLogger.class);
 
-    public void logInfo(String element, String page) {
-        logger.info(element + " at " + page);
+    public static void logInfo(String message) {
+        logger.info("INFO: " + message);
     }
 
-    public void logWarn(String element, String page) {
-        logger.warn(element + " at " + page);
+    public static void logWarn(String message) {
+        logger.warn("WARN: " + message);
     }
 
-    public void logError(String element, String page) {
-        logger.error(element + " at " + page);
+    public static void logError(String message) {
+        logger.error("ERROR: " + message);
     }
 }

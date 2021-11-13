@@ -1,6 +1,5 @@
 package browser;
 
-import browser.Browser;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -14,11 +13,6 @@ public class WaiterUtils {
     public static WebElement elementToBeClickable(String xpath) {
         return new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(ConfigManager.getConfigInt("waitingTime")))
                 .until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
-    }
-
-    public static boolean invisibilityOfElementWithText(String xpath, String originalText) {
-        return new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(ConfigManager.getConfigInt("waitingTime")))
-                .until(ExpectedConditions.invisibilityOfElementWithText(By.xpath(xpath), originalText));
     }
 
     public static Alert alertIsPresent() {

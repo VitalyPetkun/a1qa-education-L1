@@ -1,5 +1,7 @@
 package browser;
 
+import utils.MyLogger;
+
 public class Alert {
     private String elementName;
 
@@ -13,8 +15,13 @@ public class Alert {
     }
 
     public void acceptAlert() {
-        org.openqa.selenium.Alert element = WaiterUtils.alertIsPresent();
-        element.accept();
+        try {
+            org.openqa.selenium.Alert element = WaiterUtils.alertIsPresent();
+            element.accept();
+            MyLogger.logInfo("close alert.");
+        } catch (Exception ex) {
+            MyLogger.logError("not close alert.");
+        }
     }
     
     public void inputTextAlert(String text) {
@@ -27,8 +34,10 @@ public class Alert {
         try {
             WaiterUtils.alertIsPresent();
             foundAlert = true;
+            MyLogger.logInfo("open alert.");
         } catch (Exception e) {
             foundAlert = false;
+            MyLogger.logWarn("not open alert.");
         }
         return foundAlert;
     }

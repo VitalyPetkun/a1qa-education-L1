@@ -21,7 +21,7 @@ public class AlertsForm extends BaseForm{
     }
 
     public void clickBtnConfirm() {
-        btnConfirm = new Button("//button[@id='confirmButton']", "btnToSeeAlert");
+        btnConfirm = new Button("//button[@id='confirmButton']", "btnConfirm");
         btnConfirm.click();
     }
 
