@@ -1,14 +1,16 @@
-package pages;
+package pages.AlertsWindowPage;
 
 import elements.Button;
 import elements.TextBox;
+import pages.BaseForm;
 
-public class AlertsForm extends BaseForm{
+public class AlertsForm extends BaseForm {
     private Button btnToSeeAlert;
     private Button btnConfirm;
     private TextBox txtBtnConfirm;
     private Button btnPromt;
     private TextBox txtBtnPromt;
+    private AlertForm alertForm;
 
 
     public AlertsForm() {
@@ -41,6 +43,7 @@ public class AlertsForm extends BaseForm{
     }
 
     public AlertForm getAlertForm() {
-        return new AlertForm();
+        alertForm = new AlertForm();
+        return alertForm;
     }
 }

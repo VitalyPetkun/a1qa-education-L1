@@ -3,11 +3,11 @@ package pages;
 import elements.WebTable;
 import utils.MyLogger;
 
-abstract class BaseForm {
+public abstract class BaseForm {
     private String uniqElement;
     private String formName;
 
-    BaseForm(String uniqElement, String formName) {
+    public BaseForm(String uniqElement, String formName) {
         this.uniqElement = uniqElement;
         this.formName = formName;
     }

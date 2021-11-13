@@ -2,7 +2,7 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.AlertsWindowsPage;
+import pages.AlertsWindowPage.AlertsWindowsPage;
 import pages.HomePage;
 import utils.ConfigManager;
 import utils.MyLogger;

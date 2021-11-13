@@ -1,11 +1,15 @@
-package pages;
+package pages.AlertsWindowPage;
 
 import elements.Button;
+import pages.BaseForm;
 
-public class AlertsWindowsPage extends BaseForm{
+public class AlertsWindowsPage extends BaseForm {
     private Button btnAlerts;
     private Button btnNestedFrames;
     private Button btnFrames;
+    private AlertsForm alertsForm;
+    private NestedFramesForm nestedFramesForm;
+    private FramesForm framesForm;
 
     public AlertsWindowsPage() {
         super("//div[@class='left-pannel']", "AlertsWindows Page");
@@ -27,15 +31,18 @@ public class AlertsWindowsPage extends BaseForm{
     }
 
     public AlertsForm getAlertsForm() {
-        return new AlertsForm();
+        alertsForm = new AlertsForm();
+        return alertsForm;
     }
 
     public NestedFramesForm getNestedFramesForm() {
-        return new NestedFramesForm();
+        nestedFramesForm = new NestedFramesForm();
+        return nestedFramesForm;
     }
 
     public FramesForm getFramesForm() {
-        return new FramesForm();
+        framesForm = new FramesForm();
+        return framesForm;
     }
 
 }

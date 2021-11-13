@@ -1,10 +1,11 @@
-package pages;
+package pages.AlertsWindowPage;
 
 import browser.Browser;
 import elements.Iframe;
 import elements.TextBox;
+import pages.BaseForm;
 
-public class FramesForm extends BaseForm{
+public class FramesForm extends BaseForm {
     private Iframe topIframe;
     private Iframe bottomIframe;
     private TextBox txtBottomFrame;

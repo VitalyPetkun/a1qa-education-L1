@@ -1,10 +1,11 @@
-package pages;
+package pages.AlertsWindowPage;
 
 import browser.Browser;
 import elements.Iframe;
 import elements.TextBox;
+import pages.BaseForm;
 
-public class NestedFramesForm extends BaseForm{
+public class NestedFramesForm extends BaseForm {
     private Iframe parentIframe;
     private Iframe childIframe;
     private TextBox txtChildFrame;

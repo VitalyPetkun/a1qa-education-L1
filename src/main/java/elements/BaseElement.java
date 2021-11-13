@@ -45,7 +45,5 @@ abstract class BaseElement{
         return findElements(locator).size() > 0;
     }
 
-    public void switchToFrame() {
-        Browser.getDriver().switchTo().frame(findElement(locator));
-    }
+
 }

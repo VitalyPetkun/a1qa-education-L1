@@ -44,4 +44,8 @@ public class ConfigManager {
     public static int getConfigInt(String key) {
         return Integer.parseInt(configProperties.getProperty(key));
     }
+
+    public static int getTestDataInt(String key) {
+        return Integer.parseInt(testDataProperties.getProperty(key));
+    }
 }
