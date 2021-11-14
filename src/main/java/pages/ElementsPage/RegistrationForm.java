@@ -5,8 +5,6 @@ import elements.TextBox;
 import pages.BaseForm;
 import userModel.User;
 
-import java.util.List;
-
 public class RegistrationForm extends BaseForm {
     private Button btnSubmit;
     private TextBox txtFirstName;

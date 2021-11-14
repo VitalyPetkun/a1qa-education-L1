@@ -18,6 +18,7 @@ public class TablesTest  extends BaseTest{
 
         homePage = new HomePage();
         elementsPage = new ElementsPage();
+        int sizeWebTableAfterAddUser;
 
         homePage.getHeaderMenu().clickLinkHome();
         Assert.assertTrue(homePage.isFormOpen(),  "Didn't go to the Home page.");
@@ -35,6 +36,16 @@ public class TablesTest  extends BaseTest{
         elementsPage.getWebTablesForm().getRegistrationForm().clickBtnSubmit();
         Assert.assertFalse(elementsPage.getWebTablesForm().getRegistrationForm().isFormOpen(),
                 "The Registration Form is not closed.");
+        Assert.assertTrue(elementsPage.getWebTablesForm().isPresentUserData(UserManager.getUser(ConfigManager
+                .getTestDataInt("userNumberAdd"))), "User userNumber data did not appear in the table.");
+
+        sizeWebTableAfterAddUser = elementsPage.getWebTablesForm().sizeWebTable();
+        elementsPage.getWebTablesForm().clickBtnDelete(UserManager
+                .getUser(ConfigManager.getTestDataInt("userNumberAdd")));
+        Assert.assertFalse(elementsPage.getWebTablesForm().isPresentUserData(UserManager.getUser(ConfigManager
+                .getTestDataInt("userNumberAdd"))),"User userNumber has not been removed from the table.");
+        Assert.assertTrue(elementsPage.getWebTablesForm().sizeWebTable() != sizeWebTableAfterAddUser,
+                "The number of records in the table has not changed.");
 
         MyLogger.logInfo("Finish TablesTest.");
     }

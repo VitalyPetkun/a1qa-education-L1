@@ -45,5 +45,11 @@ abstract class BaseElement{
         return findElements(locator).size() > 0;
     }
 
+    public int sizeList() {
+        return findElements(locator).size();
+    }
 
+    public List<WebElement> listElements() {
+        return findElements(locator);
+    }
 }

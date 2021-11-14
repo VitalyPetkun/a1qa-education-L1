@@ -6,6 +6,7 @@ import utils.MyLogger;
 public abstract class BaseForm {
     private String uniqElement;
     private String formName;
+    private WebTable list;
 
     public BaseForm(String uniqElement, String formName) {
         this.uniqElement = uniqElement;
@@ -13,7 +14,7 @@ public abstract class BaseForm {
     }
 
     public boolean isFormOpen() {
-        WebTable list = new WebTable(uniqElement, "uniqElement " + formName);
+        list = new WebTable(uniqElement, "uniqElement " + formName);
         if(list.isPresentUniqElement())
             MyLogger.logInfo("open " + formName + ".");
         else

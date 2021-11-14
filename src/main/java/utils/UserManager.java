@@ -28,7 +28,7 @@ public class UserManager {
     }
 
     public static User getUser(int index) {
-        return users.get(index);
+        return users.get(index - 1);
     }
 }
 
