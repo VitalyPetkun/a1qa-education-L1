@@ -19,4 +19,14 @@ public class WaiterUtils {
         return new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(ConfigManager.getConfigInt("waitingTime")))
                 .until(ExpectedConditions.alertIsPresent());
     }
+
+    public static boolean numberOfWindowsToBe() {
+        return new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(ConfigManager.getConfigInt("waitingTime")))
+                .until(ExpectedConditions.numberOfWindowsToBe(2));
+    }
+
+    public static boolean titleIs() {
+        return new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(ConfigManager.getConfigInt("waitingTime")))
+                .until(ExpectedConditions.titleIs(""));
+    }
 }

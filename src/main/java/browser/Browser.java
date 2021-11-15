@@ -24,7 +24,7 @@ public class Browser extends BrowserFactory{
             driver = new ChromeDriver();
         }
         driver = setSize();
-        driver.manage().timeouts();
+        driver = timeouts();
         return driver;
     }
 
@@ -38,8 +38,35 @@ public class Browser extends BrowserFactory{
         return getDriver();
     }
 
+    private static WebDriver timeouts() {
+        driver.manage().timeouts();
+        return driver;
+    }
+
     public static void quit() {
         driver.quit();
         browser = null;
+    }
+
+    public static String getWindowHandle() {
+        return driver.getWindowHandle();
+    }
+
+    public static void switchToNextWindow(String originalWindow) {
+        WaiterUtils.numberOfWindowsToBe();
+        for (String windowHandle : driver.getWindowHandles()) {
+            if(!originalWindow.contentEquals(windowHandle)) {
+                switchToWindow(windowHandle);
+                break;
+            }
+        }
+    }
+
+    public static void switchToWindow(String windowHandle) {
+        driver.switchTo().window(windowHandle);
+    }
+
+    public static void closeWindow() {
+        driver.close();
     }
 }

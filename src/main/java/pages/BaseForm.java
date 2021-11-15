@@ -1,5 +1,6 @@
 package pages;
 
+import browser.Browser;
 import elements.WebTable;
 import utils.MyLogger;
 

@@ -7,9 +7,11 @@ public class AlertsWindowsPage extends BaseForm {
     private Button btnAlerts;
     private Button btnNestedFrames;
     private Button btnFrames;
+    private Button btnBrowserWindows;
     private AlertsForm alertsForm;
     private NestedFramesForm nestedFramesForm;
     private FramesForm framesForm;
+    private BrowserWindowsForm browserWindowsForm;
 
     public AlertsWindowsPage() {
         super("//div[@class='left-pannel']", "AlertsWindows Page");
@@ -30,6 +32,11 @@ public class AlertsWindowsPage extends BaseForm {
         btnFrames.click();
     }
 
+    public void clickBtnBrowserWindows() {
+        btnBrowserWindows = new Button("//div[contains(@class,'collapse show')]//li[@id='item-0']", "btnBrowserWindows");
+        btnBrowserWindows.click();
+    }
+
     public AlertsForm getAlertsForm() {
         alertsForm = new AlertsForm();
         return alertsForm;
@@ -43,6 +50,11 @@ public class AlertsWindowsPage extends BaseForm {
     public FramesForm getFramesForm() {
         framesForm = new FramesForm();
         return framesForm;
+    }
+
+    public BrowserWindowsForm getBrowserWindowsForm() {
+        browserWindowsForm = new BrowserWindowsForm();
+        return browserWindowsForm;
     }
 
 }
