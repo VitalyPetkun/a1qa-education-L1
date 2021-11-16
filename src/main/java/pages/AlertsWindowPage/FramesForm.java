@@ -23,14 +23,10 @@ public class FramesForm extends BaseForm {
     }
 
     public String getTextBottomFrame() {
-        switchToDefaultContent();
+        Browser.getDriver().switchTo().defaultContent();
         bottomIframe = new Iframe("//iframe[@id='frame2']", "BottomFrame");
         bottomIframe.switchToFrame();
         txtBottomFrame = new TextBox("//body", "txtBottomFrame");
         return txtBottomFrame.getText();
-    }
-
-    public void switchToDefaultContent() {
-        Browser.getDriver().switchTo().defaultContent();
     }
 }

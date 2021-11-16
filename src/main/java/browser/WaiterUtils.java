@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.ConfigManager;
-
 import java.time.Duration;
 
 public class WaiterUtils {
@@ -25,8 +24,8 @@ public class WaiterUtils {
                 .until(ExpectedConditions.numberOfWindowsToBe(2));
     }
 
-    public static boolean titleIs() {
+    public static boolean invisibilityOfElementLocated(String xpath) {
         return new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(ConfigManager.getConfigInt("waitingTime")))
-                .until(ExpectedConditions.titleIs(""));
+                .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpath)));
     }
 }

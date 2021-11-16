@@ -56,5 +56,4 @@ public class AlertsWindowsPage extends BaseForm {
         browserWindowsForm = new BrowserWindowsForm();
         return browserWindowsForm;
     }
-
 }

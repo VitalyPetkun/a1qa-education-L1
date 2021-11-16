@@ -1,6 +1,5 @@
 package pages.AlertsWindowPage;
 
-import browser.Browser;
 import elements.Iframe;
 import elements.TextBox;
 import pages.BaseForm;
@@ -27,9 +26,5 @@ public class NestedFramesForm extends BaseForm {
         childIframe.switchToFrame();
         txtChildFrame= new TextBox("//body", "txtParentFrame");
         return txtChildFrame.getText();
-    }
-
-    public void switchToDefaultContent() {
-        Browser.getDriver().switchTo().defaultContent();
     }
 }

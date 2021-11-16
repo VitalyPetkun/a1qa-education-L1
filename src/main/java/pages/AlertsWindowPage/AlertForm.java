@@ -6,7 +6,7 @@ public class AlertForm {
     private Alert alert;
 
     public AlertForm() {
-        alert = new Alert("alert");
+        alert = new Alert();
     }
 
     public void clickBtnOk() {

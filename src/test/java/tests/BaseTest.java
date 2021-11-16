@@ -9,12 +9,12 @@ public class BaseTest {
     @BeforeMethod
     protected void setup() {
         Browser.openUrl(ConfigManager.getConfigString("URLHomePage"));
-        MyLogger.logInfo("Open Browser.");
+        MyLogger.logInfo("open Browser.");
     }
 
     @AfterMethod
     protected void quitDriver() {
         Browser.quit();
-        MyLogger.logInfo("Close Browser.");
+        MyLogger.logInfo("close Browser.");
     }
 }

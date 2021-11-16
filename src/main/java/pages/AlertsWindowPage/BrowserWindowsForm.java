@@ -24,7 +24,8 @@ public class BrowserWindowsForm extends BaseForm {
     }
 
     public void clickWebTableElements() {
-        webTableElements = new WebTable("//div[@class='left-pannel']//child::div[@class='element-group'][1]//div[@class='header-wrapper']",
+        webTableElements = new WebTable(
+                "//div[@class='left-pannel']//child::div[@class='element-group'][1]//div[@class='header-wrapper']",
                 "webTableElements");
         webTableElements.click();
     }

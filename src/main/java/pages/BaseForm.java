@@ -1,6 +1,6 @@
 package pages;
 
-import browser.Browser;
+import browser.WaiterUtils;
 import elements.WebTable;
 import utils.MyLogger;
 
@@ -21,5 +21,13 @@ public abstract class BaseForm {
         else
             MyLogger.logWarn("not open " + formName + ".");
         return list.isPresentUniqElement();
+    }
+
+    public boolean isFormClose() {
+        if(WaiterUtils.invisibilityOfElementLocated(uniqElement))
+            MyLogger.logInfo("close " + formName + ".");
+        else
+            MyLogger.logWarn("not close " + formName + ".");
+        return WaiterUtils.invisibilityOfElementLocated(uniqElement);
     }
 }

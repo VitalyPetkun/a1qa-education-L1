@@ -6,7 +6,7 @@ public class User {
     private String email;
     private String age;
     private String salary;
-    private String  department;
+    private String department;
 
     public String getFirstName() {
         return firstName;

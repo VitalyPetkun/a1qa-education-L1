@@ -1,5 +1,6 @@
 package tests;
 
+import browser.Browser;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.AlertsWindowPage.AlertsWindowsPage;
@@ -13,13 +14,13 @@ public class IframeTest extends BaseTest{
 
     @Test
     public void checkIframe() {
-        MyLogger.logInfo("Start IframeTest.");
+        MyLogger.logInfo("start IframeTest.");
 
         homePage = new HomePage();
         alertsWindowsPage = new AlertsWindowsPage();
 
         homePage.getHeaderMenu().clickLinkHome();
-        Assert.assertTrue(homePage.isFormOpen(),  "Didn't go to the Home page.");
+        Assert.assertTrue(homePage.isFormOpen(),"Didn't go to the Home page.");
 
         homePage.clickBtnAlertsFrameAndWindowsHome();
         alertsWindowsPage.clickBtnNestedFrames();
@@ -31,16 +32,16 @@ public class IframeTest extends BaseTest{
         Assert.assertTrue(alertsWindowsPage.getNestedFramesForm().getTextChildFrame()
                         .contains(ConfigManager.getTestDataString("textChildFrame")),
                 "In the center of the page there is an inscription 'Child Iframe'.");
-        alertsWindowsPage.getNestedFramesForm().switchToDefaultContent();
 
+        Browser.getDriver().switchTo().defaultContent();
         alertsWindowsPage.clickBtnFrames();
         Assert.assertTrue(alertsWindowsPage.getFramesForm().isFormOpen(),
                 "The page with the form of Frames is not open.");
         Assert.assertTrue(alertsWindowsPage.getFramesForm().getTextTopFrame()
                         .contains(alertsWindowsPage.getFramesForm().getTextBottomFrame()),
                 "The text from the top frame does not match the text from the bottom.");
-        alertsWindowsPage.getFramesForm().switchToDefaultContent();
+        Browser.getDriver().switchTo().defaultContent();
 
-        MyLogger.logInfo("Finish IframeTest.");
+        MyLogger.logInfo("finish IframeTest.");
     }
 }

@@ -13,7 +13,7 @@ public class AlertsTest extends BaseTest{
 
     @Test
     public void checkAlerts() {
-        MyLogger.logInfo("Start AlertsTest.");
+        MyLogger.logInfo("start AlertsTest.");
 
         homePage = new HomePage();
         alertsWindowsPage = new AlertsWindowsPage();
@@ -52,6 +52,6 @@ public class AlertsTest extends BaseTest{
         Assert.assertTrue(alertsWindowsPage.getAlertsForm().getTextBtnPromt().contains(ConfigManager.getTestDataString("inputTextAlert")),
                 "The inscription 'You selected Ok' did not appear next to the button");
 
-        MyLogger.logInfo("Finish AlertsTest.");
+        MyLogger.logInfo("finish AlertsTest.");
     }
 }

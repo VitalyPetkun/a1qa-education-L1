@@ -3,11 +3,7 @@ package browser;
 import utils.MyLogger;
 
 public class Alert {
-    private String elementName;
-
-    public Alert(String elementName) {
-        this.elementName = elementName;
-    }
+    public Alert() {}
 
     public String getTextAlert() {
         org.openqa.selenium.Alert element = WaiterUtils.alertIsPresent();

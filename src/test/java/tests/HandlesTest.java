@@ -18,7 +18,7 @@ public class HandlesTest extends BaseTest{
 
     @Test
     public void checkHandles() {
-        MyLogger.logInfo("Start AlertsTest.");
+        MyLogger.logInfo("start HandlesTest.");
 
         homePage = new HomePage();
         alertsWindowsPage = new AlertsWindowsPage();
@@ -56,6 +56,6 @@ public class HandlesTest extends BaseTest{
         Browser.switchToWindow(originalWindow);
         Assert.assertTrue(elementsPage.getLinksForm().isFormOpen(),  "A page with a Links form is not open.");
 
-        MyLogger.logInfo("Finish HandlesTest.");
+        MyLogger.logInfo("finish HandlesTest.");
     }
 }
