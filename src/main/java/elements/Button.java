@@ -1,6 +1,8 @@
 package elements;
 
-public class Button extends BaseElement{
+import framework.BaseElement;
+
+public class Button extends BaseElement {
     public Button(String locator, String name) {
         super(locator, name);
     }

@@ -1,6 +1,8 @@
 package elements;
 
-public class Link extends BaseElement{
+import framework.BaseElement;
+
+public class Link extends BaseElement {
     public Link(String locator, String name) {
         super(locator, name);
     }

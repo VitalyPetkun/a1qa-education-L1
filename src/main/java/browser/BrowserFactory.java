@@ -9,8 +9,8 @@ import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import utils.ConfigManager;
 
-abstract class BrowserFactory {
-    protected static WebDriver factoryMethod(WebDriver driver) throws NullPointerException{
+public class BrowserFactory {
+    public static WebDriver factoryMethod(WebDriver driver) throws NullPointerException{
         switch (ConfigManager.getConfigString("nameBrowser")) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();

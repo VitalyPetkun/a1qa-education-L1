@@ -1,19 +1,15 @@
 package tests;
 
 import browser.Browser;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.ElementsPage.ElementsPage;
-import pages.ElementsPage.RegistrationForm;
-import pages.ElementsPage.WebTablesForm;
+import pages.elementspage.ElementsPage;
 import pages.HomePage;
-import userModel.User;
+import usermodel.User;
 import utils.ConfigManager;
 import utils.MyLogger;
 import utils.UserManager;
-
 
 public class TablesTest extends BaseTest {
     private HomePage homePage;
@@ -22,24 +18,20 @@ public class TablesTest extends BaseTest {
     @DataProvider
     public Object[][] getUser() {
         return new Object[][]{
-                {UserManager.getUser(ConfigManager.getTestDataInt("userNumberInFileUsers")),
-                        UserManager.getUser(ConfigManager.getTestDataInt("userNumberInFileUsers")).getFirstName(),
-                        UserManager.getUser(ConfigManager.getTestDataInt("userNumberInFileUsers")).getLastName(),
-                        UserManager.getUser(ConfigManager.getTestDataInt("userNumberInFileUsers")).getAge(),
-                        UserManager.getUser(ConfigManager.getTestDataInt("userNumberInFileUsers")).getEmail(),
-                        UserManager.getUser(ConfigManager.getTestDataInt("userNumberInFileUsers")).getSalary(),
-                        UserManager.getUser(ConfigManager.getTestDataInt("userNumberInFileUsers")).getDepartment()
-                }
+                {UserManager.getUser(0)},
+                        {UserManager.getUser(1)}
         };
     }
 
     @Test(dataProvider = "getUser")
-    public void checkTables(User user, String[] userInfo) {
+    public void checkTables(User user) {
         MyLogger.logInfo("start TablesTest.");
 
         homePage = new HomePage();
         elementsPage = new ElementsPage();
         int sizeWebTableAfterAddUser;
+
+        Browser.openUrl(ConfigManager.getConfigString("URLHomePage"));
 
         homePage.getHeaderMenu().clickLinkHome();
         Assert.assertTrue(homePage.isFormOpen(),
@@ -57,13 +49,13 @@ public class TablesTest extends BaseTest {
         elementsPage.getWebTablesForm().getRegistrationForm().clickBtnSubmit();
         Assert.assertTrue(elementsPage.getWebTablesForm().getRegistrationForm().isFormClose(),
                 "The Registration Form is not closed.");
-        Assert.assertTrue(elementsPage.getWebTablesForm().getIndexUserInWebTable(userInfo) >= 0,
+        Assert.assertTrue(elementsPage.getWebTablesForm().getIndexUserInWebTable(user) >= 0,
                 "User userNumber data did not appear in the table.");
 
         sizeWebTableAfterAddUser = elementsPage.getWebTablesForm().sizeWebTable();
-        elementsPage.getWebTablesForm().clickBtnDelete(userInfo);
+        elementsPage.getWebTablesForm().clickBtnDelete(user);
 
-        Assert.assertFalse(elementsPage.getWebTablesForm().getIndexUserInWebTable(userInfo) >= 0,
+        Assert.assertFalse(elementsPage.getWebTablesForm().getIndexUserInWebTable(user) >= 0,
                 "User userNumber has not been removed from the table.");
         Assert.assertTrue(elementsPage.getWebTablesForm().sizeWebTable() != sizeWebTableAfterAddUser,
                 "The number of records in the table has not changed.");

@@ -1,24 +1,20 @@
 package elements;
 
 import browser.Browser;
+import framework.BaseElement;
 import utils.MyLogger;
 
-public class Iframe extends BaseElement{
-    private String locator;
-    private String elementName;
-
+public class Iframe extends BaseElement {
     public Iframe(String locator, String elementName) {
         super(locator, elementName);
-        this.locator = locator;
-        this.elementName = elementName;
     }
 
     public void switchToFrame() {
         try {
-            Browser.getDriver().switchTo().frame(findElement(locator));
-            MyLogger.logInfo("switch to " + elementName + ".");
+            MyLogger.logInfo("switch to " + getElementName() + ".");
+            Browser.getDriver().switchTo().frame(findElement());
         } catch (Exception ex) {
-            MyLogger.logError("not switch to " + elementName + ".");
+            MyLogger.logError("not switch to " + getElementName() + ".");
         }
     }
 }

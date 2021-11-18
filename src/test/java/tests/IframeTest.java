@@ -3,7 +3,7 @@ package tests;
 import browser.Browser;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.AlertsWindowPage.AlertsWindowsPage;
+import pages.alertswindowpage.AlertsWindowsPage;
 import pages.HomePage;
 import utils.ConfigManager;
 import utils.MyLogger;
@@ -18,6 +18,8 @@ public class IframeTest extends BaseTest{
 
         homePage = new HomePage();
         alertsWindowsPage = new AlertsWindowsPage();
+
+        Browser.openUrl(ConfigManager.getConfigString("URLHomePage"));
 
         homePage.getHeaderMenu().clickLinkHome();
         Assert.assertTrue(homePage.isFormOpen(),"Didn't go to the Home page.");

@@ -3,7 +3,7 @@ package utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
-import userModel.User;
+import usermodel.User;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,7 +28,7 @@ public class UserManager {
     }
 
     public static User getUser(int index) {
-        return users.get(index - 1);
+        return users.get(index);
     }
 }
 

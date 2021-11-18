@@ -4,57 +4,51 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class Browser extends BrowserFactory{
+public class Browser {
     private static WebDriver driver;
-    private static Browser browser;
 
     public static WebDriver getDriver() {
-        if (browser == null) {
-            browser = new Browser();
+        if (driver == null) {
             setUpDriver();
         }
         return driver;
     }
 
-    private static WebDriver setUpDriver() {
+    private static void setUpDriver() {
         try {
-            driver = factoryMethod(driver);
+            driver = BrowserFactory.factoryMethod(driver);
         } catch (NullPointerException ex) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
         }
-        driver = setSize();
-        driver = timeouts();
-        return driver;
+        setSize();
+        timeouts();
     }
 
-    private static WebDriver setSize() {
+    private static void setSize() {
         driver.manage().window().maximize();
-        return driver;
     }
 
-    public static WebDriver openUrl(String url) {
+    public static void openUrl(String url) {
         getDriver().get(url);
-        return getDriver();
     }
 
-    private static WebDriver timeouts() {
+    private static void timeouts() {
         driver.manage().timeouts();
-        return driver;
     }
 
     public static void quit() {
-        driver.quit();
-        browser = null;
+        getDriver().quit();
+        driver = null;
     }
 
     public static String getWindowHandle() {
-        return driver.getWindowHandle();
+        return getDriver().getWindowHandle();
     }
 
     public static void switchToNextWindow(String originalWindow) {
         WaiterUtils.numberOfWindowsToBe();
-        for (String windowHandle : driver.getWindowHandles()) {
+        for (String windowHandle : getDriver().getWindowHandles()) {
             if(!originalWindow.contentEquals(windowHandle)) {
                 switchToWindow(windowHandle);
                 break;
@@ -63,10 +57,10 @@ public class Browser extends BrowserFactory{
     }
 
     public static void switchToWindow(String windowHandle) {
-        driver.switchTo().window(windowHandle);
+        getDriver().switchTo().window(windowHandle);
     }
 
     public static void closeWindow() {
-        driver.close();
+        getDriver().close();
     }
 }

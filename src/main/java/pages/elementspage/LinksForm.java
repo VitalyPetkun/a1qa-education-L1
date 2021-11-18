@@ -1,17 +1,16 @@
-package pages.ElementsPage;
+package pages.elementspage;
 
 import elements.Link;
-import pages.BaseForm;
+import framework.BaseForm;
 
 public class LinksForm extends BaseForm {
-    private Link linkHome;
+    private final String xpathLinkHome = "//a[@id='simpleLink']";
 
     public LinksForm() {
         super("//div[@id='linkWrapper']", "LinksForm");
     }
 
     public void clickLinkHome() {
-        linkHome = new Link("//a[@id='simpleLink']", "linkHome");
-        linkHome.click();
+        new Link(xpathLinkHome, "linkHome").click();
     }
 }

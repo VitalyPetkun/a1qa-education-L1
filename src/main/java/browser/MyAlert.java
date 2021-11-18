@@ -1,36 +1,35 @@
 package browser;
 
+import org.openqa.selenium.Alert;
 import utils.MyLogger;
 
-public class Alert {
-    public Alert() {}
-
-    public String getTextAlert() {
-        org.openqa.selenium.Alert element = WaiterUtils.alertIsPresent();
+public class MyAlert {
+    public static String getTextAlert() {
+        Alert element = WaiterUtils.isAlertPresent();
         return element.getText();
     }
 
-    public void acceptAlert() {
+    public static void acceptAlert() {
         try {
-            org.openqa.selenium.Alert element = WaiterUtils.alertIsPresent();
-            element.accept();
             MyLogger.logInfo("close alert.");
+            Alert element = WaiterUtils.isAlertPresent();
+            element.accept();
         } catch (Exception ex) {
             MyLogger.logError("not close alert.");
         }
     }
     
-    public void inputTextAlert(String text) {
-        org.openqa.selenium.Alert element = WaiterUtils.alertIsPresent();
+    public static void inputTextAlert(String text) {
+        Alert element = WaiterUtils.isAlertPresent();
         element.sendKeys(text);
     }
 
-    public boolean isAlertOpen() {
+    public static boolean isAlertOpen() {
         boolean foundAlert = false;
         try {
-            WaiterUtils.alertIsPresent();
-            foundAlert = true;
             MyLogger.logInfo("open alert.");
+            WaiterUtils.isAlertPresent();
+            foundAlert = true;
         } catch (Exception e) {
             foundAlert = false;
             MyLogger.logWarn("not open alert.");

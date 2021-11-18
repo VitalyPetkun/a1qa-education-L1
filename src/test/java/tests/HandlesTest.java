@@ -3,10 +3,11 @@ package tests;
 import browser.Browser;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.AlertsWindowPage.AlertsWindowsPage;
-import pages.ElementsPage.ElementsPage;
+import pages.alertswindowpage.AlertsWindowsPage;
+import pages.elementspage.ElementsPage;
 import pages.HomePage;
 import pages.SamplePage;
+import utils.ConfigManager;
 import utils.MyLogger;
 
 public class HandlesTest extends BaseTest{
@@ -24,6 +25,8 @@ public class HandlesTest extends BaseTest{
         alertsWindowsPage = new AlertsWindowsPage();
         samplePage = new SamplePage();
         elementsPage = new ElementsPage();
+
+        Browser.openUrl(ConfigManager.getConfigString("URLHomePage"));
 
         homePage.getHeaderMenu().clickLinkHome();
         Assert.assertTrue(homePage.isFormOpen(),  "Didn't go to the Home page.");

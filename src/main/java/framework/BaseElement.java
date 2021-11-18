@@ -1,4 +1,4 @@
-package elements;
+package framework;
 
 import browser.Browser;
 import browser.WaiterUtils;
@@ -9,17 +9,17 @@ import utils.MyLogger;
 
 import java.util.List;
 
-abstract class BaseElement{
+public abstract class BaseElement{
     private String locator;
     private String elementName;
 
-    BaseElement(String locator, String elementName) {
+    protected BaseElement(String locator, String elementName) {
         this.locator = locator;
         this.elementName = elementName;
     }
 
-    protected WebElement findElement(String xpath) {
-        return Browser.getDriver().findElement(By.xpath(xpath));
+    protected WebElement findElement() {
+        return Browser.getDriver().findElement(By.xpath(locator));
     }
 
     protected List<WebElement> findElements(String xpath) {
@@ -28,17 +28,17 @@ abstract class BaseElement{
 
     public void click() {
         try {
+            MyLogger.logInfo("click " + elementName + ".");
             WebElement element = WaiterUtils.elementToBeClickable(locator);
             ((JavascriptExecutor) Browser.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
             element.click();
-            MyLogger.logInfo("click " + elementName + ".");
         } catch (Exception ex) {
             MyLogger.logError("not click " + elementName + ".");
         }
     }
 
     public String getText() {
-        return findElement(locator).getText();
+        return findElement().getText();
     }
 
     public boolean isPresentUniqElement() {
@@ -51,5 +51,9 @@ abstract class BaseElement{
 
     public List<WebElement> listElements() {
         return findElements(locator);
+    }
+
+    protected String getElementName() {
+        return elementName;
     }
 }

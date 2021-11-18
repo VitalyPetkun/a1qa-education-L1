@@ -1,9 +1,10 @@
 package tests;
 
+import browser.Browser;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import pages.WidgetsPage.WidgetsPage;
+import pages.widgetspage.WidgetsPage;
 import utils.ConfigManager;
 import utils.MyLogger;
 
@@ -18,6 +19,8 @@ public class SliderAndProgressBarTest extends BaseTest {
 
         homePage = new HomePage();
         widgetsPage = new WidgetsPage();
+
+        Browser.openUrl(ConfigManager.getConfigString("URLHomePage"));
 
         homePage.getHeaderMenu().clickLinkHome();
         Assert.assertTrue(homePage.isFormOpen(), "Didn't go to the Home page.");

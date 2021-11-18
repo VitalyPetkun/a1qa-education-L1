@@ -3,10 +3,9 @@ package pages;
 import elements.Link;
 
 public class HeaderMenu {
-    private Link linkHome;
+    private final String xpathLinkHome = "//header/a";
 
     public void clickLinkHome() {
-        linkHome = new Link("//header/a", "linkHome");
-        linkHome.click();
+        new Link(xpathLinkHome, "linkHome").click();
     }
 }

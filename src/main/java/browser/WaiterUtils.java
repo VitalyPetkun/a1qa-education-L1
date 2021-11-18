@@ -14,7 +14,7 @@ public class WaiterUtils {
                 .until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
     }
 
-    public static Alert alertIsPresent() {
+    public static Alert isAlertPresent() {
         return new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(ConfigManager.getConfigInt("waitingTime")))
                 .until(ExpectedConditions.alertIsPresent());
     }
