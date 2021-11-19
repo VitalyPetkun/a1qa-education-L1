@@ -3,15 +3,16 @@ package pages.alertswindowpage;
 import elements.Iframe;
 import elements.TextBox;
 import framework.BaseForm;
+import org.openqa.selenium.By;
 
 public class NestedFramesForm extends BaseForm {
-    private final String xpathParentIframe = "//iframe[@id='frame1']";
-    private final String xpathChildIframe = "//iframe";
-    private final String xpathTxtParentFrame = "//body";
-    private final String xpathTxtChildFrame = "//body";
+    private final By xpathParentIframe = By.xpath("//iframe[@id='frame1']");
+    private final By xpathChildIframe = By.xpath("//iframe");
+    private final By xpathTxtParentFrame = By.xpath("//body");
+    private final By xpathTxtChildFrame = By.xpath("//body");
 
     public NestedFramesForm() {
-        super("//div[@id='framesWrapper']", "NestedFramesForm");
+        super(By.xpath("//div[@id='framesWrapper']"), "NestedFramesForm");
     }
 
     public String getTextParentFrame() {

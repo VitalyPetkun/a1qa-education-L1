@@ -1,17 +1,17 @@
-package browser;
+package framework.browser;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.ConfigManager;
+import framework.utils.ConfigManager;
 import java.time.Duration;
 
 public class WaiterUtils {
-    public static WebElement elementToBeClickable(String xpath) {
+    public static WebElement elementToBeClickable(By locator) {
         return new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(ConfigManager.getConfigInt("waitingTime")))
-                .until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+                .until(ExpectedConditions.elementToBeClickable(locator));
     }
 
     public static Alert isAlertPresent() {
@@ -24,8 +24,8 @@ public class WaiterUtils {
                 .until(ExpectedConditions.numberOfWindowsToBe(2));
     }
 
-    public static boolean invisibilityOfElementLocated(String xpath) {
+    public static boolean invisibilityOfElementLocated(By locator) {
         return new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(ConfigManager.getConfigInt("waitingTime")))
-                .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpath)));
+                .until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 }

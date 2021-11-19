@@ -1,4 +1,4 @@
-package browser;
+package framework.browser;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -7,10 +7,11 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
-import utils.ConfigManager;
+import framework.utils.ConfigManager;
 
 public class BrowserFactory {
-    public static WebDriver factoryMethod(WebDriver driver) throws NullPointerException{
+    public static WebDriver factoryMethod() throws NullPointerException{
+        WebDriver driver;
         switch (ConfigManager.getConfigString("nameBrowser")) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
@@ -33,7 +34,7 @@ public class BrowserFactory {
                 driver = new SafariDriver();
                 break;
             default:
-                throw new NullPointerException("Incorrect browser name.");
+                throw new NullPointerException("Incorrect framework.browser name.");
         }
         return driver;
     }

@@ -1,12 +1,12 @@
 package tests;
 
-import browser.Browser;
+import framework.browser.Browser;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.widgetspage.WidgetsPage;
-import utils.ConfigManager;
-import utils.MyLogger;
+import framework.utils.ConfigManager;
+import framework.utils.MyLogger;
 
 public class SliderAndProgressBarTest extends BaseTest {
     private HomePage homePage;
@@ -30,7 +30,7 @@ public class SliderAndProgressBarTest extends BaseTest {
         Assert.assertTrue(widgetsPage.getSliderForm().isFormOpen(), "A page with a Slider form is not open.");
 
         widgetsPage.getSliderForm().setValueSlider(ConfigManager.getTestDataInt("numberForSlider"));
-        Assert.assertTrue(widgetsPage.getSliderForm().getValueSlider() == ConfigManager.getTestDataInt("numberForSlider"),
+        Assert.assertEquals(widgetsPage.getSliderForm().getValueSlider(), ConfigManager.getTestDataInt("numberForSlider"),
                 "The value next to the slider does not match the randomly generated one.");
 
         widgetsPage.clickBtnProgressBar();
@@ -41,7 +41,7 @@ public class SliderAndProgressBarTest extends BaseTest {
         while (ConfigManager.getTestDataInt("ageEngineer") != currentValueProgressBar)
             currentValueProgressBar = widgetsPage.getProgressBarForm().getCurrentValue();
         widgetsPage.getProgressBarForm().clickBtnStop();
-        Assert.assertTrue(widgetsPage.getProgressBarForm().getCurrentValue() == ConfigManager.getTestDataInt("ageEngineer"),
+        Assert.assertEquals(widgetsPage.getProgressBarForm().getCurrentValue(), ConfigManager.getTestDataInt("ageEngineer"),
                 "The value on the load bar does not match the age of the engineer.");
 
         MyLogger.logInfo("finish SliderAndProgressBarTest.");

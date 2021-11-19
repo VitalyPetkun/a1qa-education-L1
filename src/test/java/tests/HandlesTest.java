@@ -1,14 +1,14 @@
 package tests;
 
-import browser.Browser;
+import framework.browser.Browser;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.alertswindowpage.AlertsWindowsPage;
 import pages.elementspage.ElementsPage;
 import pages.HomePage;
 import pages.SamplePage;
-import utils.ConfigManager;
-import utils.MyLogger;
+import framework.utils.ConfigManager;
+import framework.utils.MyLogger;
 
 public class HandlesTest extends BaseTest{
     private HomePage homePage;

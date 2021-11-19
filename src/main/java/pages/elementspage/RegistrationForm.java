@@ -3,19 +3,20 @@ package pages.elementspage;
 import elements.Button;
 import elements.TextBox;
 import framework.BaseForm;
+import org.openqa.selenium.By;
 import usermodel.User;
 
 public class RegistrationForm extends BaseForm {
-    private final String xpathBtnSubmit = "//button[@id='submit']";
-    private final String xpathTxtFirstName = "//input[@id='firstName']";
-    private final String xpathTxtLastName = "//input[@id='lastName']";
-    private final String xpathTxtEmail = "//input[@id='userEmail']";
-    private final String xpathTxtAge = "//input[@id='age']";
-    private final String xpathTxtSalary = "//input[@id='salary']";
-    private final String xpathTxtDepartment = "//input[@id='department']";
+    private final By xpathBtnSubmit = By.xpath("//button[@id='submit']");
+    private final By xpathTxtFirstName = By.xpath("//input[@id='firstName']");
+    private final By xpathTxtLastName = By.xpath("//input[@id='lastName']");
+    private final By xpathTxtEmail = By.xpath("//input[@id='userEmail']");
+    private final By xpathTxtAge = By.xpath("//input[@id='age']");
+    private final By xpathTxtSalary = By.xpath("//input[@id='salary']");
+    private final By xpathTxtDepartment = By.xpath("//input[@id='department']");
 
     public RegistrationForm() {
-        super("//div[@class='modal-content']", "RegistrationForm");
+        super(By.xpath("//div[@class='modal-content']"), "RegistrationForm");
     }
 
     public void clickBtnSubmit() {

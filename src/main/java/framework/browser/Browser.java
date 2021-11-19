@@ -1,4 +1,4 @@
-package browser;
+package framework.browser;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +16,7 @@ public class Browser {
 
     private static void setUpDriver() {
         try {
-            driver = BrowserFactory.factoryMethod(driver);
+            driver = BrowserFactory.factoryMethod();
         } catch (NullPointerException ex) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();

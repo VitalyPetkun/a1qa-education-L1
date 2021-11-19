@@ -3,14 +3,15 @@ package pages.alertswindowpage;
 import elements.Button;
 import elements.WebTable;
 import framework.BaseForm;
+import org.openqa.selenium.By;
 
 public class BrowserWindowsForm extends BaseForm {
-    private final String xpathBtnNewTab = "//button[@id='tabButton']";
-    private final String xpathBtnLinks = "//div[contains(@class,'collapse show')]//li[@id='item-5']";
-    private final String xpathWebTableElements = "//div[@class='left-pannel']//child::div[@class='element-group'][1]//div[@class='header-wrapper']";
+    private final By xpathBtnNewTab = By.xpath("//button[@id='tabButton']");
+    private final By xpathBtnLinks = By.xpath("//div[contains(@class,'collapse show')]//li[@id='item-5']");
+    private final By xpathWebTableElements = By.xpath("//div[@class='element-group']//div[@class='header-text' and text()='Elements']");
 
     public BrowserWindowsForm() {
-        super("//div[@id='browserWindows']", "BrowserWindowsForm");
+        super(By.xpath("//div[@id='browserWindows']"), "BrowserWindowsForm");
     }
 
     public void clickBtnNewTab() {

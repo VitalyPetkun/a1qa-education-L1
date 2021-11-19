@@ -1,11 +1,12 @@
 package elements;
 
 import framework.BaseElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import utils.MyLogger;
+import framework.utils.MyLogger;
 
 public class Slider extends BaseElement {
-    public Slider(String locator, String elementName) {
+    public Slider(By locator, String elementName) {
         super(locator, elementName);
     }
 

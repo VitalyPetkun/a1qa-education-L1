@@ -1,14 +1,15 @@
 package framework;
 
-import browser.WaiterUtils;
+import framework.browser.WaiterUtils;
 import elements.WebTable;
-import utils.MyLogger;
+import framework.utils.MyLogger;
+import org.openqa.selenium.By;
 
 public abstract class BaseForm {
-    private String uniqElement;
+    private By uniqElement;
     private String formName;
 
-    protected BaseForm(String uniqElement, String formName) {
+    protected BaseForm(By uniqElement, String formName) {
         this.uniqElement = uniqElement;
         this.formName = formName;
     }

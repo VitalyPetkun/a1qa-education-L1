@@ -1,5 +1,6 @@
 # Intellij
 .idea/
+logs/
 *.iml
 # Maven
 log/

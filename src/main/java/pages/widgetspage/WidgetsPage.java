@@ -2,13 +2,14 @@ package pages.widgetspage;
 
 import elements.Button;
 import framework.BaseForm;
+import org.openqa.selenium.By;
 
 public class WidgetsPage extends BaseForm {
-    private final String xpathBtnSlider = "//div[contains(@class,'collapse show')]//li[@id='item-3']";
-    private final String xpathBtnProgressBar = "//div[contains(@class,'collapse show')]//li[@id='item-4']";
+    private final By xpathBtnSlider = By.xpath("//div[contains(@class,'collapse show')]//li[@id='item-3']");
+    private final By xpathBtnProgressBar = By.xpath("//div[contains(@class,'collapse show')]//li[@id='item-4']");
 
     public WidgetsPage() {
-        super("//div[@class='left-pannel']", "WidgetsPage");
+        super(By.xpath("//div[@class='left-pannel']"), "WidgetsPage");
     }
 
     public void clickBtnSlider() {

@@ -3,17 +3,18 @@ package pages.elementspage;
 import elements.Button;
 import elements.WebTable;
 import framework.BaseForm;
+import org.openqa.selenium.By;
 import usermodel.User;
 
 import java.util.Arrays;
 
 public class WebTablesForm extends BaseForm {
-    private final String xpathBtnAdd = "//button[@id='addNewRecordButton']";
-    private final String xpathListRowsWebTable =
-            "//div[contains(@class,'rt-tr') and (contains(@class,'-even') or contains(@class,'-odd')) and not(contains(@class,'-padRow'))]";
+    private final By xpathBtnAdd = By.xpath("//button[@id='addNewRecordButton']");
+    private final By xpathListRowsWebTable = By.xpath(
+            "//div[contains(@class,'rt-tr') and (contains(@class,'-even') or contains(@class,'-odd')) and not(contains(@class,'-padRow'))]");
 
     public WebTablesForm() {
-        super("//div[contains(@class,'ReactTable')]", "WebTablesForm");
+        super(By.xpath("//div[contains(@class,'ReactTable')]"), "WebTablesForm");
     }
 
     public void clickBtnAdd() {
@@ -21,7 +22,7 @@ public class WebTablesForm extends BaseForm {
     }
 
     public void clickBtnDelete(User user) {
-        new Button("//span[@id='delete-record-" + (getIndexUserInWebTable(user) + 1) + "']",
+        new Button(By.xpath("//span[@id='delete-record-" + (getIndexUserInWebTable(user) + 1) + "']"),
                 "btnDeleteUser" + (getIndexUserInWebTable(user) + 1)).click();
     }
 
@@ -37,7 +38,7 @@ public class WebTablesForm extends BaseForm {
 
         WebTable listRows = new WebTable(xpathListRowsWebTable,"listRowsWebTable");
         for (int i = 0; i < listRows.sizeList(); i++) {
-            listUsers = listRows.listElements().get(i).getText().split("\n");
+            listUsers = listRows.getTextElementForListElements(i).split("\n");
             if(Arrays.equals(listUsers, userInfo))
                 index = i;
         }

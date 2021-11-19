@@ -2,15 +2,16 @@ package pages.alertswindowpage;
 
 import elements.Button;
 import framework.BaseForm;
+import org.openqa.selenium.By;
 
 public class AlertsWindowsPage extends BaseForm {
-    private final String xpathBtnAlerts = "//div[contains(@class,'collapse show')]//li[@id='item-1']";
-    private final String xpathBtnNestedFrames = "//div[contains(@class,'collapse show')]//li[@id='item-3']";
-    private final String xpathBtnFrames = "//div[contains(@class,'collapse show')]//li[@id='item-2']";
-    private final String xpathBtnBrowserWindows = "//div[contains(@class,'collapse show')]//li[@id='item-0']";
+    private final By xpathBtnAlerts = By.xpath("//div[contains(@class,'collapse show')]//li[@id='item-1']");
+    private final By xpathBtnNestedFrames = By.xpath("//div[contains(@class,'collapse show')]//li[@id='item-3']");
+    private final By xpathBtnFrames = By.xpath("//div[contains(@class,'collapse show')]//li[@id='item-2']");
+    private final By xpathBtnBrowserWindows = By.xpath("//div[contains(@class,'collapse show')]//li[@id='item-0']");
 
     public AlertsWindowsPage() {
-        super("//div[@class='left-pannel']", "AlertsWindows Page");
+        super(By.xpath("//div[@class='left-pannel']"), "AlertsWindows Page");
     }
 
     public void clickBtnAlerts() {

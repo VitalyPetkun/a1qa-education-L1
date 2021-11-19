@@ -3,14 +3,15 @@ package pages.widgetspage;
 import elements.Button;
 import elements.TextBox;
 import framework.BaseForm;
+import org.openqa.selenium.By;
 
 public class ProgressBarForm extends BaseForm {
-    private final String xpathBtnStart = "//button[@id='startStopButton']";
-    private final String xpathBtnStop = "//button[@id='startStopButton']";
-    private final String xpathTxtCurrentValue = "//div[@id='progressBar']/div";
+    private final By xpathBtnStart = By.xpath("//button[@id='startStopButton']");
+    private final By xpathBtnStop = By.xpath("//button[@id='startStopButton']");
+    private final By xpathTxtCurrentValue = By.xpath("//div[@id='progressBar']/div");
 
     public ProgressBarForm() {
-        super("//div[@id='progressBarContainer']", "ProgressBarForm");
+        super(By.xpath("//div[@id='progressBarContainer']"), "ProgressBarForm");
     }
 
     public void clickBtnStart() {

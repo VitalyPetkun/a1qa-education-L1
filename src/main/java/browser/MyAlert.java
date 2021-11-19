@@ -1,7 +1,8 @@
 package browser;
 
+import framework.browser.WaiterUtils;
 import org.openqa.selenium.Alert;
-import utils.MyLogger;
+import framework.utils.MyLogger;
 
 public class MyAlert {
     public static String getTextAlert() {

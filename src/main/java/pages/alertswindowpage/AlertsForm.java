@@ -3,17 +3,18 @@ package pages.alertswindowpage;
 import elements.Button;
 import elements.TextBox;
 import framework.BaseForm;
+import org.openqa.selenium.By;
 import utils.AlertUtils;
 
 public class AlertsForm extends BaseForm {
-    private final String xpathBtnToSeeAlert = "//button[@id='alertButton']";
-    private final String xpathBtnConfirm = "//button[@id='confirmButton']";
-    private final String xpathBtnPromt = "//button[@id='promtButton']";
-    private final String xpathTxTBtnConfirm = "//span[@id='confirmResult']";
-    private final String xpathTxTBtnPromt = "//span[@id='promptResult']";
+    private final By xpathBtnToSeeAlert = By.xpath("//button[@id='alertButton']");
+    private final By xpathBtnConfirm = By.xpath("//button[@id='confirmButton']");
+    private final By xpathBtnPromt = By.xpath("//button[@id='promtButton']");
+    private final By xpathTxTBtnConfirm = By.xpath("//span[@id='confirmResult']");
+    private final By xpathTxTBtnPromt = By.xpath("//span[@id='promptResult']");
 
     public AlertsForm() {
-        super("//div[@id='javascriptAlertsWrapper']", "AlertsForm");
+        super(By.xpath("//div[@id='javascriptAlertsWrapper']"), "AlertsForm");
     }
 
     public void clickBtnToSeeAlert() {

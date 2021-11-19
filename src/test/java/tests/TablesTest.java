@@ -1,14 +1,14 @@
 package tests;
 
-import browser.Browser;
+import framework.browser.Browser;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.elementspage.ElementsPage;
 import pages.HomePage;
 import usermodel.User;
-import utils.ConfigManager;
-import utils.MyLogger;
+import framework.utils.ConfigManager;
+import framework.utils.MyLogger;
 import utils.UserManager;
 
 public class TablesTest extends BaseTest {
@@ -57,7 +57,7 @@ public class TablesTest extends BaseTest {
 
         Assert.assertFalse(elementsPage.getWebTablesForm().getIndexUserInWebTable(user) >= 0,
                 "User userNumber has not been removed from the table.");
-        Assert.assertTrue(elementsPage.getWebTablesForm().sizeWebTable() != sizeWebTableAfterAddUser,
+        Assert.assertNotEquals(elementsPage.getWebTablesForm().sizeWebTable(), sizeWebTableAfterAddUser,
                 "The number of records in the table has not changed.");
 
         MyLogger.logInfo("finish TablesTest.");

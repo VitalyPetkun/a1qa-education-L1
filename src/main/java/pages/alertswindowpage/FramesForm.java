@@ -1,18 +1,19 @@
 package pages.alertswindowpage;
 
-import browser.Browser;
+import framework.browser.Browser;
 import elements.Iframe;
 import elements.TextBox;
 import framework.BaseForm;
+import org.openqa.selenium.By;
 
 public class FramesForm extends BaseForm {
-    private final String xpathTopIframe = "//iframe[@id='frame1']";
-    private final String xpathBottomIframe = "//iframe[@id='frame2']";
-    private final String xpathTxtTopFrame = "//body";
-    private final String xpathTxtBottomFrame = "//body";
+    private final By xpathTopIframe = By.xpath("//iframe[@id='frame1']");
+    private final By xpathBottomIframe = By.xpath("//iframe[@id='frame2']");
+    private final By xpathTxtTopFrame = By.xpath("//body");
+    private final By xpathTxtBottomFrame = By.xpath("//body");
 
     public FramesForm() {
-        super("//div[@id='framesWrapper']", "FramesForm");
+        super(By.xpath("//div[@id='framesWrapper']"), "FramesForm");
     }
 
     public String getTextTopFrame() {

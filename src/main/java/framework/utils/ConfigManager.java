@@ -1,4 +1,4 @@
-package utils;
+package framework.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,10 +11,10 @@ public class ConfigManager {
     protected static Properties testDataProperties;
     static {
         try {
-            fileConfigInputStream = new FileInputStream("src/main/resources/config.properties");
+            fileConfigInputStream = new FileInputStream("src/main/java/framework/resources/config.properties");
             configProperties = new Properties();
             configProperties.load(fileConfigInputStream);
-            fileTestDataInputStream = new FileInputStream("src/main/resources/testData.properties");
+            fileTestDataInputStream = new FileInputStream("src/test/java/resources/testData.properties");
             testDataProperties = new Properties();
             testDataProperties.load(fileTestDataInputStream);
         } catch (IOException e) {

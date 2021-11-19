@@ -1,11 +1,12 @@
 package elements;
 
-import browser.Browser;
+import framework.browser.Browser;
 import framework.BaseElement;
-import utils.MyLogger;
+import framework.utils.MyLogger;
+import org.openqa.selenium.By;
 
 public class Iframe extends BaseElement {
-    public Iframe(String locator, String elementName) {
+    public Iframe(By locator, String elementName) {
         super(locator, elementName);
     }
 

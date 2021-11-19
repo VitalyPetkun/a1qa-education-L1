@@ -1,9 +1,8 @@
 package tests;
 
-import utils.ConfigManager;
-import browser.Browser;
+import framework.browser.Browser;
 import org.testng.annotations.*;
-import utils.MyLogger;
+import framework.utils.MyLogger;
 
 public class BaseTest {
     @BeforeMethod

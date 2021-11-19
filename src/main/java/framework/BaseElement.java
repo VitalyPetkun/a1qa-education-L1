@@ -1,29 +1,29 @@
 package framework;
 
-import browser.Browser;
-import browser.WaiterUtils;
+import framework.browser.Browser;
+import framework.browser.WaiterUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import utils.MyLogger;
+import framework.utils.MyLogger;
 
 import java.util.List;
 
 public abstract class BaseElement{
-    private String locator;
+    private By locator;
     private String elementName;
 
-    protected BaseElement(String locator, String elementName) {
+    protected BaseElement(By locator, String elementName) {
         this.locator = locator;
         this.elementName = elementName;
     }
 
     protected WebElement findElement() {
-        return Browser.getDriver().findElement(By.xpath(locator));
+        return Browser.getDriver().findElement(locator);
     }
 
-    protected List<WebElement> findElements(String xpath) {
-        return Browser.getDriver().findElements(By.xpath(xpath));
+    protected List<WebElement> findElements() {
+        return Browser.getDriver().findElements(locator);
     }
 
     public void click() {
@@ -42,15 +42,15 @@ public abstract class BaseElement{
     }
 
     public boolean isPresentUniqElement() {
-        return findElements(locator).size() > 0;
+        return findElements().size() > 0;
     }
 
     public int sizeList() {
-        return findElements(locator).size();
+        return findElements().size();
     }
 
-    public List<WebElement> listElements() {
-        return findElements(locator);
+    public String getTextElementForListElements(int index) {
+        return findElements().get(index).getText();
     }
 
     protected String getElementName() {

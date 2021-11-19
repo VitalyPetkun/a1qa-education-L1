@@ -2,12 +2,13 @@ package pages.elementspage;
 
 import elements.Link;
 import framework.BaseForm;
+import org.openqa.selenium.By;
 
 public class LinksForm extends BaseForm {
-    private final String xpathLinkHome = "//a[@id='simpleLink']";
+    private final By xpathLinkHome = By.xpath("//a[@id='simpleLink']");
 
     public LinksForm() {
-        super("//div[@id='linkWrapper']", "LinksForm");
+        super(By.xpath("//div[@id='linkWrapper']"), "LinksForm");
     }
 
     public void clickLinkHome() {

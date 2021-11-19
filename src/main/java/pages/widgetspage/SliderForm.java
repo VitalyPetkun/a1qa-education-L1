@@ -3,13 +3,14 @@ package pages.widgetspage;
 import elements.Slider;
 import elements.TextBox;
 import framework.BaseForm;
+import org.openqa.selenium.By;
 
 public class SliderForm extends BaseForm {
-    private final String xpathSlider = "//div[@id='sliderContainer']//input[contains(@class,'slider')]";
-    private final String xpathTxtValueSlider = "//div[@id='sliderContainer']//input[@id='sliderValue']";
+    private final By xpathSlider = By.xpath("//div[@id='sliderContainer']//input[contains(@class,'slider')]");
+    private final By xpathTxtValueSlider = By.xpath("//div[@id='sliderContainer']//input[@id='sliderValue']");
 
     public SliderForm() {
-        super("//div[@id='sliderContainer']", "SliderForm");
+        super(By.xpath("//div[@id='sliderContainer']"), "SliderForm");
     }
 
     public void setValueSlider(int value) {
