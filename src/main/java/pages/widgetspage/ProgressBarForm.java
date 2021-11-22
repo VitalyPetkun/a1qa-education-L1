@@ -2,6 +2,7 @@ package pages.widgetspage;
 
 import elements.Button;
 import elements.TextBox;
+import elements.WebTable;
 import framework.BaseForm;
 import org.openqa.selenium.By;
 
@@ -11,7 +12,7 @@ public class ProgressBarForm extends BaseForm {
     private final By xpathTxtCurrentValue = By.xpath("//div[@id='progressBar']/div");
 
     public ProgressBarForm() {
-        super(By.xpath("//div[@id='progressBarContainer']"), "ProgressBarForm");
+        super(new WebTable(By.xpath("//div[@id='progressBarContainer']"),"uniqElementProgressBarForm"), "ProgressBarForm");
     }
 
     public void clickBtnStart() {

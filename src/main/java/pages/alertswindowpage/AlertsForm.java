@@ -2,6 +2,7 @@ package pages.alertswindowpage;
 
 import elements.Button;
 import elements.TextBox;
+import elements.WebTable;
 import framework.BaseForm;
 import org.openqa.selenium.By;
 import utils.AlertUtils;
@@ -14,7 +15,7 @@ public class AlertsForm extends BaseForm {
     private final By xpathTxTBtnPromt = By.xpath("//span[@id='promptResult']");
 
     public AlertsForm() {
-        super(By.xpath("//div[@id='javascriptAlertsWrapper']"), "AlertsForm");
+        super(new WebTable(By.xpath("//div[@id='javascriptAlertsWrapper']"),"uniqElementAlertForm"), "AlertsForm");
     }
 
     public void clickBtnToSeeAlert() {

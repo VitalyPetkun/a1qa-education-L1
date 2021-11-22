@@ -1,33 +1,30 @@
 package framework;
 
 import framework.browser.WaiterUtils;
-import elements.WebTable;
 import framework.utils.MyLogger;
-import org.openqa.selenium.By;
 
 public abstract class BaseForm {
-    private By uniqElement;
+    private BaseElement uniqElement;
     private String formName;
 
-    protected BaseForm(By uniqElement, String formName) {
+    protected BaseForm(BaseElement uniqElement, String formName) {
         this.uniqElement = uniqElement;
         this.formName = formName;
     }
 
     public boolean isFormOpen() {
-        WebTable list = new WebTable(uniqElement, "uniqElement " + formName);
-        if(list.isPresentUniqElement())
+        if(uniqElement.isPresentUniqElement())
             MyLogger.logInfo("open " + formName + ".");
         else
             MyLogger.logWarn("not open " + formName + ".");
-        return list.isPresentUniqElement();
+        return uniqElement.isPresentUniqElement();
     }
 
     public boolean isFormClose() {
-        if(WaiterUtils.invisibilityOfElementLocated(uniqElement))
+        if(WaiterUtils.invisibilityOfElementLocated(uniqElement.getLocator()))
             MyLogger.logInfo("close " + formName + ".");
         else
             MyLogger.logWarn("not close " + formName + ".");
-        return WaiterUtils.invisibilityOfElementLocated(uniqElement);
+        return WaiterUtils.invisibilityOfElementLocated(uniqElement.getLocator());
     }
 }

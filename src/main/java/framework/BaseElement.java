@@ -53,7 +53,11 @@ public abstract class BaseElement{
         return findElements().get(index).getText();
     }
 
-    protected String getElementName() {
+    public By getLocator() {
+        return locator;
+    }
+
+    public String getElementName() {
         return elementName;
     }
 }

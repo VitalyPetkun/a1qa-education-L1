@@ -2,6 +2,7 @@ package pages.alertswindowpage;
 
 import elements.Iframe;
 import elements.TextBox;
+import elements.WebTable;
 import framework.BaseForm;
 import org.openqa.selenium.By;
 
@@ -12,7 +13,7 @@ public class NestedFramesForm extends BaseForm {
     private final By xpathTxtChildFrame = By.xpath("//body");
 
     public NestedFramesForm() {
-        super(By.xpath("//div[@id='framesWrapper']"), "NestedFramesForm");
+        super(new WebTable(By.xpath("//div[@id='framesWrapper']"),"uniqElementNestedFramesForm"), "NestedFramesForm");
     }
 
     public String getTextParentFrame() {

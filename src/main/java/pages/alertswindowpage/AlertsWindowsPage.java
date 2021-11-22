@@ -1,6 +1,7 @@
 package pages.alertswindowpage;
 
 import elements.Button;
+import elements.WebTable;
 import framework.BaseForm;
 import org.openqa.selenium.By;
 
@@ -11,7 +12,7 @@ public class AlertsWindowsPage extends BaseForm {
     private final By xpathBtnBrowserWindows = By.xpath("//div[contains(@class,'collapse show')]//li[@id='item-0']");
 
     public AlertsWindowsPage() {
-        super(By.xpath("//div[@class='left-pannel']"), "AlertsWindows Page");
+        super(new WebTable(By.xpath("//div[@class='left-pannel']"),"uniqElementAlertsWindowsPage"), "AlertsWindows Page");
     }
 
     public void clickBtnAlerts() {

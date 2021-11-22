@@ -1,5 +1,6 @@
 package pages.alertswindowpage;
 
+import elements.WebTable;
 import framework.browser.Browser;
 import elements.Iframe;
 import elements.TextBox;
@@ -13,7 +14,7 @@ public class FramesForm extends BaseForm {
     private final By xpathTxtBottomFrame = By.xpath("//body");
 
     public FramesForm() {
-        super(By.xpath("//div[@id='framesWrapper']"), "FramesForm");
+        super(new WebTable(By.xpath("//div[@id='framesWrapper']"),"uniqElementFramesForm"), "FramesForm");
     }
 
     public String getTextTopFrame() {

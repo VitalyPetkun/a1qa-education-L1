@@ -2,7 +2,9 @@ package pages.elementspage;
 
 import elements.Button;
 import elements.TextBox;
+import elements.WebTable;
 import framework.BaseForm;
+import framework.utils.MyLogger;
 import org.openqa.selenium.By;
 import usermodel.User;
 
@@ -16,7 +18,7 @@ public class RegistrationForm extends BaseForm {
     private final By xpathTxtDepartment = By.xpath("//input[@id='department']");
 
     public RegistrationForm() {
-        super(By.xpath("//div[@class='modal-content']"), "RegistrationForm");
+        super(new WebTable(By.xpath("//div[@class='modal-content']"),"uniqElementRegistrationForm"), "RegistrationForm");
     }
 
     public void clickBtnSubmit() {
@@ -24,6 +26,7 @@ public class RegistrationForm extends BaseForm {
     }
 
     public void inputInfoUser(User user) {
+        MyLogger.logInfo("input info user.");
         inputFirstName(user.getFirstName());
         inputLastName(user.getLastName());
         inputEmail(user.getEmail());

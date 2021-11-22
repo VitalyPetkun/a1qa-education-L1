@@ -14,7 +14,7 @@ public class WebTablesForm extends BaseForm {
             "//div[contains(@class,'rt-tr') and (contains(@class,'-even') or contains(@class,'-odd')) and not(contains(@class,'-padRow'))]");
 
     public WebTablesForm() {
-        super(By.xpath("//div[contains(@class,'ReactTable')]"), "WebTablesForm");
+        super(new WebTable(By.xpath("//div[contains(@class,'ReactTable')]"),"uniqElementRegistrationForm"), "WebTablesForm");
     }
 
     public void clickBtnAdd() {

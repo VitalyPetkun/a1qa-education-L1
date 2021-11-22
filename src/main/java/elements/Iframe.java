@@ -1,7 +1,7 @@
 package elements;
 
-import framework.browser.Browser;
 import framework.BaseElement;
+import framework.browser.Browser;
 import framework.utils.MyLogger;
 import org.openqa.selenium.By;
 
